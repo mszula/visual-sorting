@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tune.js Advanced Sound Effect</title>
+  <!-- Dodaj Tone.js -->
+  <script src="https://cdn.jsdelivr.net/npm/tone"></script>
+</head>
+<body>
+
+<script>
+  // Inicjalizacja Tune.js
+  const synth = new Tone.Synth().toDestination();
+
+  // Funkcja do aktualizacji parametrów dźwięku
+  function updateSoundParams() {
+    const pitchValue = parseFloat(document.getElementById("pitchSlider").value);
+    const volumeValue = parseFloat(document.getElementById("volumeSlider").value);
+    const waveformValue = document.getElementById("waveformSelect").value;
+
+    // Ustaw parametry dźwięku
+    synth.set({
+      "pitch": pitchValue,
+      "volume": volumeValue,
+      "oscillator": { "type": waveformValue }
+    });
+  }
+
+  // Funkcja do odtwarzania dźwięku
+  function playSound() {
+    // Odtwórz dźwięk
+    synth.triggerAttackRelease("C4", "8n");
+  }
+
+</script>
+
+<h1>Tune.js Advanced Sound Effect</h1>
+
+<!-- Suwak do zmiany wysokości dźwięku -->
+<label for="pitchSlider">Wysokość dźwięku:</label>
+<input type="range" id="pitchSlider" min="-24" max="24" step="1" value="0" oninput="updateSoundParams()">
+<br>
+
+<!-- Suwak do regulacji głośności -->
+<label for="volumeSlider">Głośność:</label>
+<input type="range" id="volumeSlider" min="-60" max="0" step="1" value="-6" oninput="updateSoundParams()">
+<br>
+
+<!-- Lista rozwijana do wyboru kształtu fali -->
+<label for="waveformSelect">Kształt fali:</label>
+<select id="waveformSelect" onchange="updateSoundParams()">
+  <option value="sine">Sinusoidalna</option>
+  <option value="square">Kwadratowa</option>
+  <option value="triangle">Trójkątna</option>
+  <option value="sawtooth">Piłokształtna</option>
+</select>
+<br>
+
+<!-- Przycisk do odtwarzania dźwięku -->
+<button onclick="playSound()">Odtwórz dźwięk</button>
+
+</body>
+</html>
