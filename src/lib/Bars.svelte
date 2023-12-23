@@ -19,7 +19,7 @@
     for (let currentBar = 0; currentBar < bars.length; currentBar++) {
       const barSize = oneStepSize * bars[currentBar].value;
       if (bars[currentBar].makeSound) {
-        // osc.frequency.value = bars[currentBar].value * 2;
+        osc.frequency.value = bars[currentBar].value * 2;
       }
       if (bars[currentBar].processing) {
         context.fillStyle = "red";
