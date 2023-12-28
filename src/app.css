@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.range:disabled {
+    opacity: 0.5;
+}

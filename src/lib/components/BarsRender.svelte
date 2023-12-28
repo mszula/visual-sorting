@@ -1,15 +1,16 @@
 <script lang="ts">
   export let bars: Array<SortElement>;
-  export let height: number;
   export let osc: Oscillator;
+  export let theme: CustomTheme[string];
 
   import { Canvas, Layer, type Render } from "svelte-canvas";
-  import type { SortElement } from "./types";
+  import type { SortElement } from "../types";
   import type { Oscillator } from "tone";
+  import type { CustomTheme } from "daisyui";
 
   let render: Render;
   $: render = ({ context, width, height }) => {
-    context.fillStyle = "black";
+    context.fillStyle = theme["base-100"];
     context.fillRect(0, 0, width, height);
 
     const spaceWidth = 0.2;
@@ -18,15 +19,15 @@
 
     for (let currentBar = 0; currentBar < bars.length; currentBar++) {
       const barSize = oneStepSize * bars[currentBar].value;
-      if (bars[currentBar].makeSound) {
-        osc.frequency.value = bars[currentBar].value * 2;
-      }
       if (bars[currentBar].processing) {
-        context.fillStyle = "red";
-      } else if (currentBar === bars[currentBar].onPlaceIndex) {
-        context.fillStyle = "green";
+        context.fillStyle = theme.secondary;
+        osc.frequency.value = bars[currentBar].value * 2;
+      } else if (bars[currentBar].accesing) {
+        context.fillStyle = theme.accent;
+      } else if (currentBar === bars[currentBar].value - 1) {
+        context.fillStyle = theme.primary;
       } else {
-        context.fillStyle = "white";
+        context.fillStyle = theme["neutral-content"] || theme["neutral"];
       }
       context.fillRect(
         currentBar * (barWidth + spaceWidth),
@@ -38,6 +39,6 @@
   };
 </script>
 
-<Canvas {height}>
+<Canvas autoplay>
   <Layer {render} />
 </Canvas>

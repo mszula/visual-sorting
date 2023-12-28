@@ -1,12 +1,5 @@
-import type { SortElement } from "./types";
-
-export const generateArray = (size: number): Array<SortElement> =>
-  Array.from({ length: size }, (_value, index) => index + 1).map((v, i) => ({
-    value: v,
-    processing: false,
-    onPlaceIndex: i,
-    makeSound: false,
-  }));
+export const generateArray = (size: number): number[] =>
+  Array.from({ length: size }, (_value, index) => index + 1);
 
 export const shuffle = <T>(array: Array<T>): Array<T> => {
   for (let i = array.length - 1; i >= 0; i--) {

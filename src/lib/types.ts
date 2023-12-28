@@ -1,6 +1,11 @@
 export type SortElement = {
   value: number;
+  accesing: boolean;
   processing: boolean;
-  onPlaceIndex: number;
   makeSound: boolean;
+};
+
+export type ProgressIndicator = {
+  accesing: number[]; // list of processing indexes
+  processing: number[]; // list of processing indexes
 };
