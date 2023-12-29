@@ -20,13 +20,16 @@
       const barSize = oneStepSize * bars[currentBar].value;
       if (bars[currentBar].processing) {
         context.fillStyle = theme.secondary;
-        playValue(bars[currentBar].value);
       } else if (bars[currentBar].accesing) {
         context.fillStyle = theme.accent;
       } else if (currentBar === bars[currentBar].value - 1) {
         context.fillStyle = theme.primary;
       } else {
         context.fillStyle = theme["neutral-content"] || theme["neutral"];
+      }
+
+      if (bars[currentBar].accesing) {
+        playValue(bars[currentBar].value);
       }
       context.fillRect(
         currentBar * (barWidth + spaceWidth),
