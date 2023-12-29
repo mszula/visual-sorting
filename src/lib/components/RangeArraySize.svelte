@@ -17,6 +17,6 @@
     max="1000"
     bind:value={size}
     disabled={$running}
-    class="range max-w-xs range-sm range-primary"
+    class="range range-sm range-primary"
   />
 </label>

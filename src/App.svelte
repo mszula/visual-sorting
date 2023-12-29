@@ -20,7 +20,7 @@
   import { arrayToSort, running } from "./states";
   import { soundStart, soundStop } from "./lib/sound";
 
-  let selectedTheme = "light";
+  let selectedTheme = "dim";
   let size = 300;
   let delay = 2;
   let bars: SortElement[];
@@ -29,7 +29,11 @@
 
   onMount(() => {
     themeChange(false);
-    selectedTheme = document.documentElement.dataset.theme || "light";
+    selectedTheme = document.documentElement.dataset.theme || "dim";
+    const barsContainer = document.getElementById("bars-container");
+    if (barsContainer) {
+      barsContainer.style.height = `${barsContainer.offsetHeight}px`;
+    }
   });
 
   $: theme = daisyuiColors[selectedTheme as Theme];
@@ -100,16 +104,16 @@
     <div class="flex">
       <Header bind:selectedTheme />
     </div>
-    <div class="flex-1 flex flex-col m-5">
-      <div style="width: 100%; height: 500px">
+    <div class="flex-1 flex flex-col m-2 md:m-5">
+      <div class="flex flex-grow min-h-44" id="bars-container">
         <BarsRender {bars} {theme} />
       </div>
     </div>
-    <div class="flex m-5">
-      <div class="flex w-full">
+    <div class="flex mx-2 mb-2 md:mx-5 md:mb-5">
+      <div class="flex flex-wrap w-full flex-col md:flex-row">
         <AlgorithmSelector {selectAlgorithm} />
         <div
-          class="grid flex-row flex-grow card bg-base-300 rounded-box place-items-center p-5"
+          class="grid flex-row flex-grow card bg-base-300 rounded-box place-items-center p-5 mb-2 md:mb-0"
         >
           <div class="flex w-full justify-between items-center">
             <div class="flex mr-5 flex-col items-center">
@@ -121,11 +125,11 @@
             </div>
           </div>
         </div>
-        <div class="divider divider-horizontal"></div>
+        <div class="hidden md:divider md:divider-horizontal"></div>
         <div
           class="grid flex-grow card bg-base-300 rounded-box place-items-center"
         >
-          <div class="form-control w-52">
+          <div class="form-control w-32">
             <label class="label cursor-pointer">
               <span class="label-text">Sound</span>
               <input type="checkbox" class="toggle" checked />

@@ -15,6 +15,6 @@
     max="20"
     step="0.1"
     bind:value={delay}
-    class="range max-w-xs range-sm"
+    class="range range-sm"
   />
 </label>
