@@ -7,3 +7,8 @@ export type SortContext = {
 };
 
 export type SortingGenerator = Generator<ProgressIndicator, void, unknown>;
+
+export type AlgorithmDefinition = {
+  name: string;
+  function: (arr: number[]) => SortingGenerator;
+};

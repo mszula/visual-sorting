@@ -1,19 +1,43 @@
 <script lang="ts">
-  export let running: boolean;
-  export let start: () => void;
+  export let size: number;
   export let step: () => void;
+  export let reset: () => void;
+
+  import { arrayToSort, running } from "../../states";
+  import { generateArray, shuffle } from "../randomized-array-generator";
+  import { soundStart, soundStop } from "../sound";
+
+  const start = () => {
+    if ($running) {
+      $running = false;
+      soundStop();
+      return;
+    }
+
+    $running = true;
+    soundStart(size);
+  };
+
+  const reverse = () => {
+    $arrayToSort = generateArray(size).reverse();
+    reset();
+  };
+
+  const shuffleClick = () => {
+    $arrayToSort = shuffle($arrayToSort);
+    reset();
+  };
 </script>
 
 <div class="mb-4">
   <button
     on:click={start}
-    class="btn {running ? 'btn-secondary' : 'btn-primary'} btn-lg w-28"
-    >{running ? "Stop" : "Start"}</button
+    class="btn {$running ? 'btn-secondary' : 'btn-primary'} btn-lg w-24"
+    >{$running ? "Stop" : "Start"}</button
   >
-  <button on:click={step} class="btn btn-lg w-28">Step</button>
+  <button on:click={step} class="btn btn-lg w-24">Step</button>
 </div>
 <div>
-  <button on:click={() => {}} class="btn">Shuffle</button>
-  <button on:click={() => {}} class="btn">Reverse</button>
-  <button on:click={() => {}} class="btn">Reset</button>
+  <button on:click={shuffleClick} class="btn">Shuffle</button>
+  <button on:click={reverse} class="btn">Reverse</button>
 </div>

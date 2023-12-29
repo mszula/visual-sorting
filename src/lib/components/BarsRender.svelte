@@ -1,12 +1,11 @@
 <script lang="ts">
   export let bars: Array<SortElement>;
-  export let osc: Oscillator;
   export let theme: CustomTheme[string];
 
   import { Canvas, Layer, type Render } from "svelte-canvas";
   import type { SortElement } from "../types";
-  import type { Oscillator } from "tone";
   import type { CustomTheme } from "daisyui";
+  import { playValue } from "../sound";
 
   let render: Render;
   $: render = ({ context, width, height }) => {
@@ -21,7 +20,7 @@
       const barSize = oneStepSize * bars[currentBar].value;
       if (bars[currentBar].processing) {
         context.fillStyle = theme.secondary;
-        osc.frequency.value = bars[currentBar].value * 2;
+        playValue(bars[currentBar].value);
       } else if (bars[currentBar].accesing) {
         context.fillStyle = theme.accent;
       } else if (currentBar === bars[currentBar].value - 1) {

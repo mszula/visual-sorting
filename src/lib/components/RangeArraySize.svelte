@@ -1,6 +1,7 @@
 <script lang="ts">
-  export let running: boolean;
   export let size: number;
+
+  import { running } from "../../states";
 </script>
 
 <label class="form-control w-full mb-2">
@@ -15,7 +16,7 @@
     min="2"
     max="1000"
     bind:value={size}
-    disabled={running}
+    disabled={$running}
     class="range max-w-xs range-sm range-primary"
   />
 </label>
