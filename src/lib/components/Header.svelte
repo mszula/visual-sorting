@@ -16,10 +16,12 @@
 
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <!-- svelte-ignore a11y-missing-attribute -->
-    <a class="btn btn-ghost"
-      ><span class="text-xl">Visual Sorting</span> aka The Sound Of Sorting</a
-    >
+    <a href="/" class="btn btn-ghost">
+      <span class="text-lg md:text-xl"
+        >Visual Sorting <span class="text-sm">aka The Sound Of Sorting</span
+        ></span
+      >
+    </a>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
