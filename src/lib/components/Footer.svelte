@@ -1,4 +1,4 @@
-<footer class="footer items-center p-4 bg-neutral text-neutral-content">
+<footer class="footer items-center p-4 bg-base-200">
   <aside class="items-center grid-flow-col">
     <p>
       Built with ❤️ by <a
