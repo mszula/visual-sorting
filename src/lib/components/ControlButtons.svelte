@@ -5,18 +5,8 @@
 
   import { arrayToSort, running } from "../../states";
   import { generateArray, shuffle } from "../randomized-array-generator";
-  import { soundStart, soundStop } from "../sound";
 
-  const start = () => {
-    if ($running) {
-      $running = false;
-      soundStop();
-      return;
-    }
-
-    $running = true;
-    soundStart(size);
-  };
+  const start = () => ($running = !$running);
 
   const reverse = () => {
     $arrayToSort = generateArray(size).reverse();

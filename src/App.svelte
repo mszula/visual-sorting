@@ -3,7 +3,7 @@
   import { generateArray, shuffle } from "./lib/randomized-array-generator";
   import type { ProgressIndicator, SortElement } from "./lib/types";
   import Header from "./lib/components/Header.svelte";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { themeChange } from "theme-change";
   import daisyuiColors from "daisyui/src/theming/themes";
   import type { Theme } from "daisyui";
@@ -23,6 +23,7 @@
   let selectedTheme = "dim";
   let size = 300;
   let delay = 2;
+  let sound = true;
   let bars: SortElement[];
   let intervalRef: number;
   let algorithm: AlgorithmDefinition & { instance: SortingGenerator };
@@ -40,6 +41,9 @@
   $: {
     $arrayToSort = shuffle(generateArray(size));
     reset();
+  }
+  $: {
+    $running && sound ? soundStart(size) : soundStop();
   }
   $: {
     window.clearInterval(intervalRef);
@@ -79,15 +83,15 @@
     soundStop();
   };
 
-  const step = () => {
+  const step = async () => {
     if ($running) {
       $running = false;
-      soundStop();
+      await tick();
     }
 
     const next = algorithm.instance.next();
     if (!next.done) {
-      soundStart(size);
+      sound && soundStart(size);
       updateBars($arrayToSort, next.value);
       soundStop("+0.1");
     }
@@ -105,7 +109,7 @@
       <Header bind:selectedTheme />
     </div>
     <div class="flex-1 flex flex-col m-2 md:m-5">
-      <div class="flex flex-grow min-h-44" id="bars-container">
+      <div class="flex flex-grow min-h-80" id="bars-container">
         <BarsRender {bars} {theme} />
       </div>
     </div>
@@ -132,7 +136,7 @@
           <div class="form-control w-32">
             <label class="label cursor-pointer">
               <span class="label-text">Sound</span>
-              <input type="checkbox" class="toggle" checked />
+              <input type="checkbox" class="toggle" bind:checked={sound} />
             </label>
           </div>
         </div>
