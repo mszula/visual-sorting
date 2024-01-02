@@ -60,7 +60,11 @@
       </li>
     </ul>
 
-    <button class="btn btn-square btn-ghost">
+    <a
+      href="https://github.com/mszula/visual-sorting"
+      target="_blank"
+      class="btn btn-square btn-ghost"
+    >
       <svg
         class="w-[24px] h-[24px]"
         aria-hidden="true"
@@ -74,6 +78,6 @@
           clip-rule="evenodd"
         />
       </svg>
-    </button>
+    </a>
   </div>
 </div>
