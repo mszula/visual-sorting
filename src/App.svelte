@@ -30,7 +30,7 @@
 
   onMount(() => {
     themeChange(false);
-    selectedTheme = document.documentElement.dataset.theme || "dim";
+    selectedTheme = document.documentElement.dataset.theme || selectedTheme;
     const barsContainer = document.getElementById("bars-container");
     if (barsContainer) {
       barsContainer.style.height = `${barsContainer.offsetHeight}px`;
@@ -69,18 +69,16 @@
     bars = [...b].map((v, i) => ({
       value: v,
       accesing: p.accesing.includes(i),
-      processing: p.processing.includes(i),
-      makeSound: false,
+      makeSound: p?.sound === i,
     }));
   };
 
   const reset = () => {
-    updateBars($arrayToSort, { accesing: [], processing: [] });
+    updateBars($arrayToSort, { accesing: [] });
     $running = false;
     if (algorithm) {
       algorithm.instance = algorithm.function($arrayToSort);
     }
-    soundStop();
   };
 
   const step = async () => {
