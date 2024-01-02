@@ -10,6 +10,6 @@ const commitHash = child_process
 export default defineConfig({
   plugins: [svelte()],
   define: {
-    __COMMIT_HASH__: JSON.stringify(commitHash),
+    __COMMIT_HASH__: process.env.COMMIT_HASH || JSON.stringify(commitHash),
   },
 });
