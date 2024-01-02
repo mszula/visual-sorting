@@ -19,8 +19,8 @@ Visual Sorting is a tool that provides a visualization of sorting algorithms, ac
 
 - Bubble Sort
 - Selection Sort (soon)
-- Insertion Sort (soon)
-- Quick Sort (soon)
+- Insertion Sort
+- Quick Sort
 
 ## 🙌 Contribution
 
