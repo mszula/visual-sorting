@@ -17,7 +17,7 @@
 </script>
 
 <div class="flex bg-base-200 rounded-box mb-2 md:mb-0 md:mr-5">
-  <ul class="menu menu-horizontal md:menu-vertical md:grid md:grid-cols-2">
+  <ul class="menu menu-horizontal md:menu-vertical md:h-40">
     {#each algorithms as algo, index}
       <li>
         <button
@@ -26,16 +26,5 @@
         >
       </li>
     {/each}
-    <!-- 
-    <li class="disabled"><button>Selection sort</button></li>
-    <li class="disabled"><button>Insertion sort</button></li>
-    <li><button>Quick sort</button></li>
-    <li class="disabled"><button>Merge sort</button></li> -->
   </ul>
-  <!-- <ul class="menu">
-    <li class="disabled"><button>Coctail shaker sort</button></li>
-    <li class="disabled"><button>Shell sort</button></li>
-    <li class="disabled"><button>Radix sort</button></li>
-    <li class="disabled"><button>Bogo sort</button></li>
-  </ul> -->
 </div>
