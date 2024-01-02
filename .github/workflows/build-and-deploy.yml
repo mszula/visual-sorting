@@ -23,7 +23,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: COMMIT_HASH='"${GITHUB_SHA::7}"' npm run gh-pages-build
+        env:
+          COMMIT_HASH: ${{ toJson(GITHUB_SHA::7) }}
+        run: npm run gh-pages-build
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
