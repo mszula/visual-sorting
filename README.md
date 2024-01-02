@@ -6,7 +6,7 @@ https://github.com/mszula/visual-sorting/assets/17621834/3077ad21-ed6e-432c-ae51
 
 ## 🚀 Play with it
 
-[https://mszula.github.com/visual-sorting](https://mszula.github.com/visual-sorting)
+[https://mszula.github.io/visual-sorting/](https://mszula.github.io/visual-sorting/)
 
 ## 🌟 Features
 
