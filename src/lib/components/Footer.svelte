@@ -7,7 +7,9 @@
         target="_blank">mszula</a
       >
       using Svelte.
-      <span class="text-xs opacity-30">Version: {window.__COMMIT_HASH__}</span>
+      <span class="text-xs opacity-30"
+        >Version: {import.meta.env.VITE_GIT_COMMIT_REF}</span
+      >
     </p>
   </aside>
   <nav
