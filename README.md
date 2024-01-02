@@ -2,13 +2,15 @@
 
 Visual Sorting is a tool that provides a visualization of sorting algorithms, accompanied by an auditory experience. It allows users to witness how various sorting algorithms work through dynamic horizontal bars.
 
+https://github.com/mszula/visual-sorting/assets/17621834/40b899c3-161d-4593-be7a-c4da2da776a0
+
 ## 🚀 Play with it
 
 [https://mszula.github.com/visual-sorting](https://mszula.github.com/visual-sorting)
 
 ## 🌟 Features
 
-- **Dynamic Visualization**: Vertical bars present the sorting process in real time.
+- **Dynamic Visualization**: Vertical bars present the sorting process in real-time.
 - **Step-by-Step Exploration**: Go through each step of the algorithm, and analyze what going on.
 - **Sound Experience**: Each vertical bar represents a value in the sorting array. As the algorithm works on a bar, a sound is produced based on its height.
 - **Input Array Options**: Customize the array to sort by shuffling or reversing. Choose array sizes ranging from 2 to 1000 elements.
