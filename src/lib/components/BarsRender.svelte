@@ -18,9 +18,7 @@
 
     for (let currentBar = 0; currentBar < bars.length; currentBar++) {
       const barSize = oneStepSize * bars[currentBar].value;
-      if (bars[currentBar].processing) {
-        context.fillStyle = theme.secondary;
-      } else if (bars[currentBar].accesing) {
+      if (bars[currentBar].accesing) {
         context.fillStyle = theme.accent;
       } else if (currentBar === bars[currentBar].value - 1) {
         context.fillStyle = theme.primary;
@@ -28,7 +26,7 @@
         context.fillStyle = theme["neutral-content"] || theme["neutral"];
       }
 
-      if (bars[currentBar].accesing) {
+      if (bars[currentBar].makeSound) {
         playValue(bars[currentBar].value);
       }
       context.fillRect(
