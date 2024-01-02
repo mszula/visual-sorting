@@ -20,7 +20,7 @@ https://github.com/mszula/visual-sorting/assets/17621834/3077ad21-ed6e-432c-ae51
 ## 🤖 Supported Sorting Algorithms
 
 - Bubble Sort
-- Selection Sort (soon)
+- Selection Sort
 - Insertion Sort
 - Quick Sort
 
