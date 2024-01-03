@@ -1,5 +1,6 @@
 import { bubleSort } from "./buble-sort";
 import { insertionSort } from "./insertion-sort";
+import { mergeSort } from "./merge-sort";
 import { quickSort } from "./quick-sort";
 import { selectionSort } from "./selection-sort";
 import { shellSort } from "./shell-sort";
@@ -25,5 +26,9 @@ export const algorithms: AlgorithmDefinition[] = [
   {
     name: "Shell Sort",
     function: shellSort,
+  },
+  {
+    name: "Merge Sort",
+    function: mergeSort,
   },
 ];
