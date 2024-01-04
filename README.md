@@ -25,8 +25,11 @@ https://github.com/mszula/visual-sorting/assets/17621834/3077ad21-ed6e-432c-ae51
 - Quick Sort
 - Shell Sort
 - Merge Sort
-- Counting Sort
 - Radix Sort
+- Heap Sort
+- Bitonic Sort
+- Tim Sort
+- Gnome Sort
 
 ## 🙌 Contribution
 

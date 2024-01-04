@@ -122,14 +122,21 @@
               <ControlButtons {step} {reset} {size} />
             </div>
             <div class="flex grow flex-col">
-              <RangeArraySize bind:size />
+              {#if algorithm?.arraySizeComponent}
+                <svelte:component
+                  this={algorithm.arraySizeComponent}
+                  bind:size
+                />
+              {:else}
+                <RangeArraySize bind:size />
+              {/if}
               <RangeDelay bind:delay />
             </div>
           </div>
         </div>
         <div class="hidden md:divider md:divider-horizontal"></div>
         <div
-          class="grid flex-grow card bg-base-300 rounded-box place-items-center"
+          class="grid card bg-base-300 rounded-box place-items-center flex-grow max-w-80"
         >
           <div class="form-control w-32">
             <label class="label cursor-pointer">

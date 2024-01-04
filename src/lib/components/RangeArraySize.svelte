@@ -14,7 +14,7 @@
     id="size"
     name="size"
     min="2"
-    max="1000"
+    max="1024"
     bind:value={size}
     disabled={$running}
     class="range range-sm range-primary"
