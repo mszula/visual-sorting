@@ -1,5 +1,6 @@
 import RangeArraySizePowerOfTwo from "../components/RangeArraySizePowerOfTwo.svelte";
 import { bitonicSort } from "./bitonic-sort";
+import { bogoSort } from "./bogo-sort";
 import { bubleSort } from "./buble-sort";
 import { cocktailSort } from "./cocktail-sort";
 import { cycleSort } from "./cycle-sort";
@@ -77,5 +78,9 @@ export const algorithms: AlgorithmDefinition[] = [
   {
     name: "Stooge Sort",
     function: stoogeSort,
+  },
+  {
+    name: "Bogo Sort",
+    function: bogoSort,
   },
 ];
