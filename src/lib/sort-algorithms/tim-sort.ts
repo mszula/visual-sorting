@@ -24,7 +24,7 @@ const insertionSort = function* (
     let j = i - 1;
 
     while (j >= left && arr[j] > temp) {
-      yield { accesing: [i, j], sound: j };
+      yield { access: [i, j], sound: j };
       arr[j + 1] = arr[j];
       j--;
     }
@@ -46,11 +46,11 @@ const merge = function* (
   const left = new Array(len1);
   const right = new Array(len2);
   for (let x = 0; x < len1; x++) {
-    yield { accesing: [l + x], sound: l + x };
+    yield { access: [l + x], sound: l + x };
     left[x] = arr[l + x];
   }
   for (let x = 0; x < len2; x++) {
-    yield { accesing: [m + 1 + x], sound: m + 1 + x };
+    yield { access: [m + 1 + x], sound: m + 1 + x };
     right[x] = arr[m + 1 + x];
   }
 
@@ -61,7 +61,7 @@ const merge = function* (
   // After comparing, we merge those two
   // array in larger sub array
   while (i < len1 && j < len2) {
-    yield { accesing: [k], sound: k };
+    yield { access: [k], sound: k };
 
     if (left[i] <= right[j]) {
       arr[k] = left[i];
@@ -76,7 +76,7 @@ const merge = function* (
   // Copy remaining elements
   // of left, if any
   while (i < len1) {
-    yield { accesing: [k], sound: k };
+    yield { access: [k], sound: k };
 
     arr[k] = left[i];
     k++;
@@ -86,7 +86,7 @@ const merge = function* (
   // Copy remaining element
   // of right, if any
   while (j < len2) {
-    yield { accesing: [k], sound: k };
+    yield { access: [k], sound: k };
 
     arr[k] = right[j];
     k++;
@@ -102,7 +102,7 @@ export const timSort = function* (arr: number[]): SortingGenerator {
 
   // Sort individual subarrays of size RUN
   for (let i = 0; i < n; i += minRun) {
-    yield { accesing: [i], sound: i };
+    yield { access: [i], sound: i };
 
     yield* insertionSort(arr, i, Math.min(i + MIN_MERGE - 1, n - 1));
   }
@@ -127,7 +127,7 @@ export const timSort = function* (arr: number[]): SortingGenerator {
       const mid = left + size - 1;
       const right = Math.min(left + 2 * size - 1, n - 1);
 
-      yield { accesing: [left, right], sound: right };
+      yield { access: [left, right], sound: right };
 
       // Merge sub array arr[left.....mid] &
       // arr[mid+1....right]

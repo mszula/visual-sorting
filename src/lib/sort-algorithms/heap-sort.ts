@@ -12,19 +12,19 @@ const heapify = function* (
 
   // If left child is larger than root
   if (l < N && arr[l] > arr[largest]) {
-    yield { accesing: [l, largest], sound: l };
+    yield { access: [l, largest], sound: l };
     largest = l;
   }
 
   // If right child is larger than largest so far
   if (r < N && arr[r] > arr[largest]) {
-    yield { accesing: [r, largest], sound: r };
+    yield { access: [r, largest], sound: r };
     largest = r;
   }
 
   // If largest is not root
   if (largest != i) {
-    yield { accesing: [i, largest], sound: i };
+    yield { access: [i, largest], sound: i };
     let swap = arr[i];
     arr[i] = arr[largest];
     arr[largest] = swap;
@@ -44,7 +44,7 @@ export const heapSort = function* (arr: number[]): SortingGenerator {
 
   // One by one extract an element from heap
   for (let i = N - 1; i > 0; i--) {
-    yield { accesing: [0, i], sound: i };
+    yield { access: [0, i], sound: i };
     // Move current root to end
     let temp = arr[0];
     arr[0] = arr[i];

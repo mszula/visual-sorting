@@ -18,7 +18,7 @@
 
     for (let currentBar = 0; currentBar < bars.length; currentBar++) {
       const barSize = oneStepSize * bars[currentBar].value;
-      if (bars[currentBar].accesing) {
+      if (bars[currentBar].access) {
         context.fillStyle = theme.accent;
       } else if (currentBar === bars[currentBar].value - 1) {
         context.fillStyle = theme.primary;

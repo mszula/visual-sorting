@@ -3,7 +3,7 @@ import type { SortingGenerator } from "./types";
 const getMax = function* (arr: number[], n: number) {
   let mx = arr[0];
   for (let i = 1; i < n; i++) {
-    yield { accesing: [i], sound: i };
+    yield { access: [i], sound: i };
     if (arr[i] > mx) {
       mx = arr[i];
     }
@@ -26,7 +26,7 @@ const countSort = function* (
   for (i = 0; i < n; i++) {
     let x = Math.floor(arr[i] / exp) % 10;
     count[x]++;
-    yield { accesing: [i], sound: i };
+    yield { access: [i], sound: i };
   }
 
   // Change count[i] so that count[i] now contains
@@ -38,14 +38,14 @@ const countSort = function* (
     let x = Math.floor(arr[i] / exp) % 10;
     output[count[x] - 1] = arr[i];
     count[x]--;
-    yield { accesing: [i], sound: i };
+    yield { access: [i], sound: i };
   }
 
   // Copy the output array to arr[], so that arr[] now
   // contains sorted numbers according to current digit
   for (i = 0; i < n; i++) {
     arr[i] = output[i];
-    yield { accesing: [i], sound: i };
+    yield { access: [i], sound: i };
   }
 };
 
@@ -60,8 +60,8 @@ export const radixSort = function* (arr: number[]): SortingGenerator {
   // instead of passing digit number, exp is passed.
   // exp is 10^i where i is current digit number
   for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10) {
-    yield { accesing: [] };
+    yield { access: [] };
     yield* countSort(arr, len, exp);
-    yield { accesing: [] };
+    yield { access: [] };
   }
 };

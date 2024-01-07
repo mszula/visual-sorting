@@ -30,6 +30,10 @@ https://github.com/mszula/visual-sorting/assets/17621834/3077ad21-ed6e-432c-ae51
 - Bitonic Sort
 - Tim Sort
 - Gnome Sort
+- Cycle Sort
+- Coctail Sort
+- Pancake Sort
+- Stooge Sort
 
 ## 🙌 Contribution
 

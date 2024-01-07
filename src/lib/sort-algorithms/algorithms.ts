@@ -1,15 +1,18 @@
 import RangeArraySizePowerOfTwo from "../components/RangeArraySizePowerOfTwo.svelte";
 import { bitonicSort } from "./bitonic-sort";
 import { bubleSort } from "./buble-sort";
-import { countingSort } from "./counting-sort";
+import { cocktailSort } from "./cocktail-sort";
+import { cycleSort } from "./cycle-sort";
 import { gnomeSort } from "./gnome-sort";
 import { heapSort } from "./heap-sort";
 import { insertionSort } from "./insertion-sort";
 import { mergeSort } from "./merge-sort";
+import { pancakeSort } from "./pancake-sort";
 import { quickSort } from "./quick-sort";
 import { radixSort } from "./radix-sort";
 import { selectionSort } from "./selection-sort";
 import { shellSort } from "./shell-sort";
+import { stoogeSort } from "./stooge-sort";
 import { timSort } from "./tim-sort";
 import type { AlgorithmDefinition } from "./types";
 
@@ -39,10 +42,6 @@ export const algorithms: AlgorithmDefinition[] = [
     function: mergeSort,
   },
   {
-    name: "Counting Sort",
-    function: countingSort,
-  },
-  {
     name: "Radix Sort",
     function: radixSort,
   },
@@ -62,5 +61,21 @@ export const algorithms: AlgorithmDefinition[] = [
   {
     name: "Gnome Sort",
     function: gnomeSort,
+  },
+  {
+    name: "Cycle Sort",
+    function: cycleSort,
+  },
+  {
+    name: "Cocktail Sort",
+    function: cocktailSort,
+  },
+  {
+    name: "Pancake Sort",
+    function: pancakeSort,
+  },
+  {
+    name: "Stooge Sort",
+    function: stoogeSort,
   },
 ];

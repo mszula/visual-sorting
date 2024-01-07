@@ -68,13 +68,13 @@
   const updateBars = (b: number[], p: ProgressIndicator) => {
     bars = [...b].map((v, i) => ({
       value: v,
-      accesing: p.accesing.includes(i),
+      access: p.access.includes(i),
       makeSound: p?.sound === i,
     }));
   };
 
   const reset = () => {
-    updateBars($arrayToSort, { accesing: [] });
+    updateBars($arrayToSort, { access: [] });
     $running = false;
     if (algorithm) {
       algorithm.instance = algorithm.function($arrayToSort);

@@ -10,12 +10,12 @@ export const shellSort = function* (arr: number[]): SortingGenerator {
       for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
         arr[j] = arr[j - gap];
 
-        yield { accesing: [i, j - gap], sound: j - gap };
+        yield { access: [i, j - gap], sound: j - gap };
       }
 
       arr[j] = temp;
 
-      yield { accesing: [i, j], sound: j };
+      yield { access: [i, j], sound: j };
     }
   }
 };
