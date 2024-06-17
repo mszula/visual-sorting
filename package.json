@@ -8,22 +8,28 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "gh-pages-build": "npm run build --  --base=/visual-sorting/"
+    "gh-pages-build": "npm run build --  --base=/visual-sorting/",
+    "format": "prettier --write ./src",
+    "lint": "eslint ./src"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^3.0.1",
-    "@tsconfig/svelte": "^5.0.2",
-    "autoprefixer": "^10.4.16",
-    "daisyui": "^4.4.23",
-    "postcss": "^8.4.32",
-    "svelte": "^4.2.8",
-    "svelte-canvas": "^1.0.2",
-    "svelte-check": "^3.6.2",
-    "tailwindcss": "^3.4.0",
+    "@sveltejs/vite-plugin-svelte": "^3.1.1",
+    "@tsconfig/svelte": "^5.0.4",
+    "autoprefixer": "^10.4.19",
+    "daisyui": "^4.12.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-svelte": "^2.39.5",
+    "postcss": "^8.4.38",
+    "prettier": "^3.3.2",
+    "svelte": "^4.2.18",
+    "svelte-canvas": "^1.2.0",
+    "svelte-check": "^3.8.0",
+    "tailwindcss": "^3.4.4",
     "theme-change": "^2.5.0",
-    "tone": "^14.7.77",
-    "tslib": "^2.6.2",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "tone": "^15.0.4",
+    "tslib": "^2.6.3",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.13.0",
+    "vite": "^5.3.1"
   }
 }

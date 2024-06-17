@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 export const cocktailSort = function* (a: number[]): SortingGenerator {
   let swapped = true;
@@ -16,7 +16,7 @@ export const cocktailSort = function* (a: number[]): SortingGenerator {
     for (let i = start; i < end - 1; ++i) {
       yield { access: [i, i + 1], sound: i + 1 };
       if (a[i] > a[i + 1]) {
-        let temp = a[i];
+        const temp = a[i];
         a[i] = a[i + 1];
         a[i + 1] = temp;
         swapped = true;
@@ -39,7 +39,7 @@ export const cocktailSort = function* (a: number[]): SortingGenerator {
     for (let i = end - 1; i >= start; i--) {
       yield { access: [i, i + 1], sound: i };
       if (a[i] > a[i + 1]) {
-        let temp = a[i];
+        const temp = a[i];
         a[i] = a[i + 1];
         a[i + 1] = temp;
         swapped = true;

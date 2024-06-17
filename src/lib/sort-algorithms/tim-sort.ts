@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 const MIN_MERGE = 32;
 

@@ -1,26 +1,26 @@
 <script lang="ts">
-  import "./app.css";
-  import { generateArray, shuffle } from "./lib/randomized-array-generator";
-  import type { ProgressIndicator, SortElement } from "./lib/types";
-  import Header from "./lib/components/Header.svelte";
-  import { onMount, tick } from "svelte";
-  import { themeChange } from "theme-change";
-  import daisyuiColors from "daisyui/src/theming/themes";
-  import type { Theme } from "daisyui";
-  import AlgorithmSelector from "./lib/components/AlgorithmSelector.svelte";
-  import ControlButtons from "./lib/components/ControlButtons.svelte";
-  import RangeArraySize from "./lib/components/RangeArraySize.svelte";
-  import RangeDelay from "./lib/components/RangeDelay.svelte";
-  import Footer from "./lib/components/Footer.svelte";
-  import BarsRender from "./lib/components/BarsRender.svelte";
+  import './app.css';
+  import { generateArray, shuffle } from './lib/randomized-array-generator';
+  import type { ProgressIndicator, SortElement } from './lib/types';
+  import Header from './lib/components/Header.svelte';
+  import { onMount, tick } from 'svelte';
+  import { themeChange } from 'theme-change';
+  import daisyuiColors from 'daisyui/src/theming/themes';
+  import type { Theme } from 'daisyui';
+  import AlgorithmSelector from './lib/components/AlgorithmSelector.svelte';
+  import ControlButtons from './lib/components/ControlButtons.svelte';
+  import RangeArraySize from './lib/components/RangeArraySize.svelte';
+  import RangeDelay from './lib/components/RangeDelay.svelte';
+  import Footer from './lib/components/Footer.svelte';
+  import BarsRender from './lib/components/BarsRender.svelte';
   import type {
     AlgorithmDefinition,
     SortingGenerator,
-  } from "./lib/sort-algorithms/types";
-  import { arrayToSort, running } from "./states";
-  import { soundStart, soundStop } from "./lib/sound";
+  } from './lib/sort-algorithms/types';
+  import { arrayToSort, running } from './states';
+  import { soundStart, soundStop } from './lib/sound';
 
-  let selectedTheme = "dim";
+  let selectedTheme = 'dim';
   let size = 300;
   let delay = 2;
   let sound = true;
@@ -31,7 +31,7 @@
   onMount(() => {
     themeChange(false);
     selectedTheme = document.documentElement.dataset.theme || selectedTheme;
-    const barsContainer = document.getElementById("bars-container");
+    const barsContainer = document.getElementById('bars-container');
     if (barsContainer) {
       barsContainer.style.height = `${barsContainer.offsetHeight}px`;
     }
@@ -91,7 +91,7 @@
     if (!next.done) {
       sound && soundStart(size);
       updateBars($arrayToSort, next.value);
-      soundStop("+0.1");
+      soundStop('+0.1');
     }
   };
 
@@ -107,7 +107,7 @@
       <Header bind:selectedTheme />
     </div>
     <div class="flex-1 flex flex-col m-2 md:m-5">
-      <div class="flex flex-grow min-h-80" id="bars-container">
+      <div id="bars-container" class="flex flex-grow min-h-80">
         <BarsRender {bars} {theme} />
       </div>
     </div>
@@ -119,7 +119,7 @@
         >
           <div class="flex w-full justify-between items-center">
             <div class="flex mr-5 flex-col items-center">
-              <ControlButtons {step} {reset} {size} />
+              <ControlButtons {reset} {size} {step} />
             </div>
             <div class="flex grow flex-col">
               {#if algorithm?.arraySizeComponent}
@@ -141,7 +141,7 @@
           <div class="form-control w-32">
             <label class="label cursor-pointer">
               <span class="label-text">Sound</span>
-              <input type="checkbox" class="toggle" bind:checked={sound} />
+              <input class="toggle" type="checkbox" bind:checked={sound} />
             </label>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 function* partition(items: number[], left: number, right: number) {
   const pivot = items[Math.floor((right + left) / 2)];

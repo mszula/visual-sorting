@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 export const selectionSort = function* (arr: number[]): SortingGenerator {
   const n = arr.length;
@@ -12,7 +12,7 @@ export const selectionSort = function* (arr: number[]): SortingGenerator {
       yield { access: [i, j], sound: j };
     }
     if (min != i) {
-      let tmp = arr[i];
+      const tmp = arr[i];
       arr[i] = arr[min];
       arr[min] = tmp;
     }

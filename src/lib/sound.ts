@@ -1,7 +1,7 @@
-import { Synth } from "tone";
-import type { Time } from "tone/build/esm/core/type/Units";
+import { Synth } from 'tone';
+import type { Time } from 'tone/build/esm/core/type/Units';
 
-let synth = new Synth().toDestination();
+const synth = new Synth().toDestination();
 let freqStepSize = 0;
 
 const maxFrequency = 1500;

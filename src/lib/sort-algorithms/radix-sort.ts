@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 const getMax = function* (arr: number[], n: number) {
   let mx = arr[0];
@@ -24,7 +24,7 @@ const countSort = function* (
 
   // Store count of occurrences in count[]
   for (i = 0; i < n; i++) {
-    let x = Math.floor(arr[i] / exp) % 10;
+    const x = Math.floor(arr[i] / exp) % 10;
     count[x]++;
     yield { access: [i], sound: i };
   }
@@ -35,7 +35,7 @@ const countSort = function* (
 
   // Build the output array
   for (i = n - 1; i >= 0; i--) {
-    let x = Math.floor(arr[i] / exp) % 10;
+    const x = Math.floor(arr[i] / exp) % 10;
     output[count[x] - 1] = arr[i];
     count[x]--;
     yield { access: [i], sound: i };

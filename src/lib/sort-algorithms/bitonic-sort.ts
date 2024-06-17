@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 /* The parameter dir indicates the sorting direction,
     ASCENDING or DESCENDING; if (a[i] > a[j]) agrees
@@ -13,7 +13,7 @@ const compAndSwap = function* (
   if ((arr[i] > arr[j] && dir === 1) || (arr[i] < arr[j] && dir === 0)) {
     yield { access: [i, j], sound: i };
     // Swapping elements
-    var temp = arr[i];
+    const temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
   }
@@ -32,7 +32,7 @@ const bitonicMerge = function* (
 ): SortingGenerator {
   if (cnt > 1) {
     const k = Math.floor(cnt / 2);
-    for (var i = low; i < low + k; i++) {
+    for (let i = low; i < low + k; i++) {
       yield* compAndSwap(arr, i, i + k, dir);
     }
     yield* bitonicMerge(arr, low, k, dir);

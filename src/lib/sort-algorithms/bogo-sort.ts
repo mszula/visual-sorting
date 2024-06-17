@@ -1,7 +1,7 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 function* isSorted(arr: number[]) {
-  for (var i = 1; i < arr.length; i++) {
+  for (let i = 1; i < arr.length; i++) {
     yield { access: [i], sound: i };
     if (arr[i] < arr[i - 1]) return false;
   }
@@ -22,7 +22,6 @@ function* shuffle(arr: number[]) {
 
 // Sorts array a[0..n-1] using Bogo sort
 export const bogoSort = function* (a: number[]): SortingGenerator {
-  const n = a.length;
   // if array is not sorted then shuffle
   // the array again
   let sorted = yield* isSorted(a);

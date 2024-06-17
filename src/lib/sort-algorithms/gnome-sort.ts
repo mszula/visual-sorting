@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 export const gnomeSort = function* (arr: number[]): SortingGenerator {
   const n = arr.length;

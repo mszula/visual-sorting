@@ -8,13 +8,13 @@
     <span class="label-text-alt">{delay} ms</span>
   </div>
   <input
-    type="range"
     id="delay"
     name="delay"
-    min="0"
-    max="20"
-    step="0.1"
-    bind:value={delay}
     class="range range-sm"
+    max="20"
+    min="0"
+    step="0.1"
+    type="range"
+    bind:value={delay}
   />
 </label>

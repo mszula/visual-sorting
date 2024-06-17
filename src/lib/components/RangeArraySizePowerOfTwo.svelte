@@ -1,7 +1,7 @@
 <script lang="ts">
   export let size: number;
 
-  import { running } from "../../states";
+  import { running } from '../../states';
 
   const steps = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024];
 
@@ -21,13 +21,13 @@
   <div class="join">
     {#each steps as value}
       <input
-        class="join-item btn btn-sm h-5 min-h-5"
-        type="radio"
         name="options"
-        {value}
+        class="join-item btn btn-sm h-5 min-h-5"
         aria-label={value.toString()}
-        bind:group={size}
         disabled={$running}
+        type="radio"
+        {value}
+        bind:group={size}
       />
     {/each}
   </div>

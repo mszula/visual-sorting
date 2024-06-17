@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 export const bubleSort = function* (arr: number[]): SortingGenerator {
   for (let i = 0; i < arr.length; i++) {

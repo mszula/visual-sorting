@@ -1,5 +1,5 @@
-import type { SvelteComponent } from "svelte";
-import type { ProgressIndicator, SortElement } from "../types";
+import type { SvelteComponent } from 'svelte';
+import type { ProgressIndicator, SortElement } from '../types';
 
 export type SortContext = {
   updateBars: (b: SortElement[]) => void;

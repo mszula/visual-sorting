@@ -1,6 +1,6 @@
 // JavaScript program to sort array using pancake sort
 
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 // Reverses arr[0..i]
 function* flip(arr: number[], i: number) {
@@ -46,7 +46,7 @@ export const pancakeSort = function* (arr: number[]): SortingGenerator {
     // Find index of the
     // maximum element in
     // arr[0..curr_size-1]
-    let mi = yield* findMax(arr, curr_size);
+    const mi = yield* findMax(arr, curr_size);
 
     // Move the maximum element
     // to end of current array

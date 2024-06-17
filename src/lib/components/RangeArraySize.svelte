@@ -1,7 +1,7 @@
 <script lang="ts">
   export let size: number;
 
-  import { running } from "../../states";
+  import { running } from '../../states';
 </script>
 
 <label class="form-control w-full mb-2">
@@ -10,13 +10,13 @@
     <span class="label-text-alt">{size} bars</span>
   </div>
   <input
-    type="range"
     id="size"
     name="size"
-    min="2"
-    max="1024"
-    bind:value={size}
-    disabled={$running}
     class="range range-sm range-primary"
+    disabled={$running}
+    max="1024"
+    min="2"
+    type="range"
+    bind:value={size}
   />
 </label>

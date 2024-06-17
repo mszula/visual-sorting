@@ -1,11 +1,8 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 // Function sort the array using Cycle sort
 export const cycleSort = function* (arr: number[]): SortingGenerator {
   const n = arr.length;
-
-  // count number of memory writes
-  let writes = 0;
 
   // traverse array elements and put it to on
   // the right place
@@ -30,10 +27,9 @@ export const cycleSort = function* (arr: number[]): SortingGenerator {
     // put the item to it's right position
     if (pos != cycle_start) {
       //   yield { access: [cycle_start, pos], sound: pos };
-      let temp = item;
+      const temp = item;
       item = arr[pos];
       arr[pos] = temp;
-      writes++;
     }
 
     // Rotate rest of the cycle
@@ -52,10 +48,9 @@ export const cycleSort = function* (arr: number[]): SortingGenerator {
       // put the item to it's right position
       if (item != arr[pos]) {
         // yield { access: [cycle_start, pos], sound: pos };
-        let temp = item;
+        const temp = item;
         item = arr[pos];
         arr[pos] = temp;
-        writes++;
       }
     }
   }

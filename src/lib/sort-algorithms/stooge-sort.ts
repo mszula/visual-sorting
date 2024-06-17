@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 function* stoogeSortRun(arr: number[], l: number, h: number): SortingGenerator {
   if (l >= h) return;
@@ -8,7 +8,7 @@ function* stoogeSortRun(arr: number[], l: number, h: number): SortingGenerator {
   // If first element is smaller
   // than last, swap them
   if (arr[l] > arr[h]) {
-    let t = arr[l];
+    const t = arr[l];
     arr[l] = arr[h];
     arr[h] = t;
   }
@@ -16,7 +16,7 @@ function* stoogeSortRun(arr: number[], l: number, h: number): SortingGenerator {
   // If there are more than 2
   // elements in the array
   if (h - l + 1 > 2) {
-    let t = Math.floor((h - l + 1) / 3);
+    const t = Math.floor((h - l + 1) / 3);
 
     // Recursively sort first
     // 2/3 elements
