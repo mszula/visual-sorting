@@ -17,16 +17,47 @@
     $arrayToSort = shuffle($arrayToSort);
     reset();
   };
+
+  const oddsEvens = () =>
+    $arrayToSort
+      .sort((a, b) => a - b)
+      .reduce<[number[], number[]]>(
+        ([odds, evens], v) => {
+          v % 2 === 0 ? evens.push(v) : odds.push(v);
+          return [odds, evens];
+        },
+        [[], []]
+      );
+
+  const valley = () => {
+    const [odds, evens] = oddsEvens();
+    $arrayToSort = [...odds.reverse(), ...evens];
+
+    reset();
+  };
+
+  const mountain = () => {
+    const [odds, evens] = oddsEvens();
+    $arrayToSort = [...odds, ...evens.reverse()];
+
+    reset();
+  };
 </script>
 
 <div class="mb-4">
-  <button
-    class="btn {$running ? 'btn-secondary' : 'btn-primary'} btn-lg w-24"
-    on:click={start}>{$running ? 'Stop' : 'Start'}</button
-  >
-  <button class="btn btn-lg w-24" on:click={step}>Step</button>
+  <div class="join">
+    <button
+      class="btn join-item {$running
+        ? 'btn-secondary'
+        : 'btn-primary'} btn-lg w-24"
+      on:click={start}>{$running ? 'Stop' : 'Start'}</button
+    >
+    <button class="btn join-item btn-lg w-24" on:click={step}>Step</button>
+  </div>
+  <button class="btn btn-lg" on:click={shuffleClick}>Shuffle</button>
 </div>
 <div>
-  <button class="btn" on:click={shuffleClick}>Shuffle</button>
   <button class="btn" on:click={reverse}>Reverse</button>
+  <button class="btn" on:click={valley}>Valley</button>
+  <button class="btn" on:click={mountain}>Mountain</button>
 </div>
