@@ -5,7 +5,7 @@ const synth = new Synth().toDestination();
 let freqStepSize = 0;
 
 const maxFrequency = 1500;
-const minFrequency = 100;
+const minFrequency = 10;
 
 export const soundStart = (size: number) => {
   freqStepSize = maxFrequency / size;
