@@ -24,7 +24,7 @@ export default defineConfig({
       basic: {
         title: 'Visual Sorting aka The Sound Of Sorting',
         type: 'website',
-        image: '/demo.png',
+        image: '/visual-sorting/demo.png',
         description:
           '🔮 🔈 Visual Sorting (aka The Sound Of Sorting) is a tool that provides a visualization of sorting algorithms, accompanied by an auditory experience.',
         url: 'https://mszula.github.io/visual-sorting/',
