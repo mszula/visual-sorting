@@ -14,12 +14,12 @@
   };
 
   const shuffleClick = () => {
-    $arrayToSort = shuffle($arrayToSort);
+    $arrayToSort = shuffle(generateArray(size));
     reset();
   };
 
   const oddsEvens = () =>
-    $arrayToSort
+    generateArray(size)
       .sort((a, b) => a - b)
       .reduce<[number[], number[]]>(
         ([odds, evens], v) => {
