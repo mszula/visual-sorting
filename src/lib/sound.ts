@@ -1,23 +1,39 @@
-import { Synth } from 'tone';
-import type { Time } from 'tone/build/esm/core/type/Units';
+import {
+  customOscillators,
+  customOscillatorTypes,
+} from 'web-audio-oscillators';
 
-const synth = new Synth().toDestination();
+export type OscillatorType = (typeof customOscillatorTypes)[number];
+
+const context = new AudioContext();
+
+let oscillator: OscillatorNode;
 let freqStepSize = 0;
 
 const maxFrequency = 1500;
 const minFrequency = 10;
 
-export const soundStart = (size: number) => {
+export const soundStart = (size: number, oscillatorName: OscillatorType) => {
   freqStepSize = maxFrequency / size;
-  synth.triggerAttack(0);
+  if (oscillator) {
+    soundStop();
+  }
+  oscillator = customOscillators[oscillatorName](context);
+  oscillator.connect(context.destination);
+  oscillator.start();
 };
 
-export const soundStop = (time?: Time) => {
-  synth.triggerRelease(time);
+export const soundStop = () => {
+  if (oscillator) {
+    oscillator.stop();
+    oscillator.disconnect();
+  }
 };
 
 export const playValue = (value: number) => {
   const freq = freqStepSize * (value - 1) + minFrequency;
 
-  synth.oscillator.frequency.value = freq;
+  if (oscillator) {
+    oscillator.frequency.value = freq;
+  }
 };
