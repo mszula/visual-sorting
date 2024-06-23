@@ -18,7 +18,8 @@
     SortingGenerator,
   } from './lib/sort-algorithms/types';
   import { arrayToSort, running } from './states';
-  import { soundStart, soundStop } from './lib/sound';
+  import { soundStart, soundStop, type OscillatorType } from './lib/sound';
+  import SoundControl from './lib/components/SoundControl.svelte';
 
   let selectedTheme = 'dim';
   let size = 300;
@@ -27,6 +28,7 @@
   let bars: SortElement[];
   let intervalRef: number;
   let algorithm: AlgorithmDefinition & { instance: SortingGenerator };
+  let oscillatorType: OscillatorType = 'triangle';
 
   onMount(() => {
     themeChange(false);
@@ -43,7 +45,7 @@
     reset();
   }
   $: {
-    $running && sound ? soundStart(size) : soundStop();
+    $running && sound ? soundStart(size, oscillatorType) : soundStop();
   }
   $: {
     window.clearInterval(intervalRef);
@@ -89,9 +91,9 @@
 
     const next = algorithm.instance.next();
     if (!next.done) {
-      sound && soundStart(size);
+      sound && soundStart(size, oscillatorType);
       updateBars($arrayToSort, next.value);
-      soundStop('+0.1');
+      soundStop();
     }
   };
 
@@ -117,11 +119,13 @@
         <div
           class="grid flex-row flex-grow card bg-base-300 rounded-box place-items-center p-5 mb-2 md:mb-0"
         >
-          <div class="flex w-full justify-between items-center">
-            <div class="flex mr-5 flex-col items-center">
+          <div
+            class="flex flex-col w-full justify-between items-center lg:flex-row"
+          >
+            <div class="flex mr-5 flex-col items-center w-full lg:w-auto">
               <ControlButtons {reset} {size} {step} />
             </div>
-            <div class="flex grow flex-col">
+            <div class="flex grow flex-col w-full lg:w-auto">
               {#if algorithm?.arraySizeComponent}
                 <svelte:component
                   this={algorithm.arraySizeComponent}
@@ -130,19 +134,16 @@
               {:else}
                 <RangeArraySize bind:size />
               {/if}
-              <RangeDelay bind:delay />
+              <RangeDelay bind:realDelay={delay} />
             </div>
           </div>
         </div>
         <div class="hidden md:divider md:divider-horizontal"></div>
         <div
-          class="grid card bg-base-300 rounded-box place-items-center flex-grow max-w-80"
+          class="grid card bg-base-300 rounded-box place-items-center flex-grow w-full lg:max-w-80 p-5"
         >
-          <div class="form-control w-32">
-            <label class="label cursor-pointer">
-              <span class="label-text">Sound</span>
-              <input class="toggle" type="checkbox" bind:checked={sound} />
-            </label>
+          <div class="flex w-full justify-between items-center">
+            <SoundControl bind:sound bind:oscillatorType />
           </div>
         </div>
       </div>
