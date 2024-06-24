@@ -19,12 +19,10 @@
   } from './lib/sort-algorithms/types';
   import { arrayToSort, running } from './states';
   import { soundStart, soundStop, type OscillatorType } from './lib/sound';
-  import SoundControl from './lib/components/SoundControl.svelte';
 
   let selectedTheme = 'dim';
   let size = 300;
   let delay = 2;
-  let sound = true;
   let bars: SortElement[];
   let intervalRef: number;
   let algorithm: AlgorithmDefinition & { instance: SortingGenerator };
@@ -45,7 +43,7 @@
     reset();
   }
   $: {
-    $running && sound ? soundStart(size, oscillatorType) : soundStop();
+    $running && oscillatorType ? soundStart(size, oscillatorType) : soundStop();
   }
   $: {
     window.clearInterval(intervalRef);
@@ -91,7 +89,7 @@
 
     const next = algorithm.instance.next();
     if (!next.done) {
-      sound && soundStart(size, oscillatorType);
+      oscillatorType && soundStart(size, oscillatorType);
       updateBars($arrayToSort, next.value);
       soundStop();
     }
@@ -106,7 +104,7 @@
 <main>
   <div class="flex flex-col min-h-screen">
     <div class="flex">
-      <Header bind:selectedTheme />
+      <Header bind:selectedTheme bind:oscillatorType />
     </div>
     <div class="flex-1 flex flex-col m-2 md:m-5">
       <div id="bars-container" class="flex flex-grow min-h-80">
@@ -136,14 +134,6 @@
               {/if}
               <RangeDelay bind:realDelay={delay} />
             </div>
-          </div>
-        </div>
-        <div class="hidden md:divider md:divider-horizontal"></div>
-        <div
-          class="grid card bg-base-300 rounded-box place-items-center flex-grow w-full lg:max-w-80 p-5"
-        >
-          <div class="flex w-full justify-between items-center">
-            <SoundControl bind:sound bind:oscillatorType />
           </div>
         </div>
       </div>

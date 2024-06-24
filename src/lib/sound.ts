@@ -3,7 +3,7 @@ import {
   customOscillatorTypes,
 } from 'web-audio-oscillators';
 
-export type OscillatorType = (typeof customOscillatorTypes)[number];
+export type OscillatorType = (typeof customOscillatorTypes)[number] | null;
 
 const context = new AudioContext();
 
@@ -13,7 +13,10 @@ let freqStepSize = 0;
 const maxFrequency = 1500;
 const minFrequency = 10;
 
-export const soundStart = (size: number, oscillatorName: OscillatorType) => {
+export const soundStart = (
+  size: number,
+  oscillatorName: NonNullable<OscillatorType>
+) => {
   freqStepSize = maxFrequency / size;
   if (oscillator) {
     soundStop();
