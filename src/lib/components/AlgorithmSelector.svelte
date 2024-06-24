@@ -17,7 +17,7 @@
 </script>
 
 <div class="flex bg-base-200 rounded-box mb-2 md:mb-0 md:mr-5">
-  <ul class="menu menu-horizontal md:menu-vertical xl:h-40">
+  <ul class="menu grid grid-rows-4 grid-flow-col">
     {#each algorithms as algo, index}
       <li>
         <button
