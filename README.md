@@ -1,4 +1,4 @@
-# Visual Sorting aka The Sound Of Sorting
+# 🔮 🔈 Visual Sorting aka The Sound Of Sorting
 
 Visual Sorting is a tool that provides a visualization of sorting algorithms, accompanied by an auditory experience. It allows users to witness how various sorting algorithms work through dynamic horizontal bars.
 
