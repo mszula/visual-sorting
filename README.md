@@ -20,12 +20,13 @@ https://github.com/mszula/visual-sorting/assets/17621834/3077ad21-ed6e-432c-ae51
 ## 🤖 Supported Sorting Algorithms
 
 - Bubble Sort
-- Selection Sort
-- Insertion Sort
 - Quick Sort
 - Shell Sort
 - Merge Sort
-- Radix Sort
+- Insertion Sort
+- Selection Sort
+- Radix LSD Sort
+- Radix MSD Sort
 - Heap Sort
 - Bitonic Sort
 - Tim Sort
@@ -35,6 +36,8 @@ https://github.com/mszula/visual-sorting/assets/17621834/3077ad21-ed6e-432c-ae51
 - Pancake Sort
 - Stooge Sort
 - Bogo Sort
+- Exchange Sort
+- Odd Even Sort
 
 ## 🙌 Contribution
 
