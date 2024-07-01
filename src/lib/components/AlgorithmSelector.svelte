@@ -21,10 +21,10 @@
 </script>
 
 <div class="flex bg-base-200 rounded-box mb-2 md:mb-0 md:mr-5">
-  <div class="carousel rounded-box w-[30.5rem]">
+  <div class="carousel rounded-box md:w-[30.5rem]">
     {#each algorithms as algos, group}
       <div id="group{group}" class="carousel-item w-full">
-        <ul class="menu grid grid-rows-4 grid-flow-col">
+        <ul class="menu flex flex-row md:grid md:grid-rows-4 grid-flow-col">
           {#each algos as algo, index}
             <li>
               <button

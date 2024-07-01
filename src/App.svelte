@@ -120,7 +120,7 @@
           <div
             class="flex flex-col w-full justify-between items-center lg:flex-row"
           >
-            <div class="flex mr-5 flex-col items-center w-full lg:w-auto">
+            <div class="flex mr-5 md:flex-col items-center w-full lg:w-auto">
               <ControlButtons {reset} {size} {step} />
             </div>
             <div class="flex grow flex-col w-full lg:w-auto">
