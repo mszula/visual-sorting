@@ -39,6 +39,10 @@ https://github.com/mszula/visual-sorting/assets/17621834/3077ad21-ed6e-432c-ae51
 - Exchange Sort
 - Odd Even Sort
 
+## 🔍 Rationale
+
+Visual Sorting was created to explore and learn Svelte, a modern JavaScript framework. Inspired by Timo Bingmann's captivating video "The Sound of Sorting" (https://www.youtube.com/watch?v=kPRA0W1kECg), which combines sorting algorithm visualizations with sound, I wanted to develop a tool that offers a similar educational and engaging experience. Visual Sorting aims to make learning sorting algorithms both enjoyable and insightful through dynamic visuals and sounds.
+
 ## 🙌 Contribution
 
 If you have suggestions for how Visual Sorting could be improved, or want to report a bug, open an issue! We'd love all and any contributions. If you can, leave a star as well 🌟
