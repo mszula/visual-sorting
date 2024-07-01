@@ -67,4 +67,4 @@ And that's it 😄
 
 ## 📄 License
 
-[ISC](https://github.com/mszula/visual-sorting/LICENSE) © 2023 Mateusz Szuła
+[ISC](https://github.com/mszula/visual-sorting/blob/main/LICENSE) © 2024 Mateusz Szuła
