@@ -91,7 +91,7 @@
     if (!next.done) {
       oscillatorType && soundStart(size, oscillatorType);
       updateBars($arrayToSort, next.value);
-      soundStop();
+      setTimeout(soundStop, 100);
     }
   };
 
