@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .range:disabled {
   opacity: 0.5;
 }
