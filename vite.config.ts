@@ -34,4 +34,13 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          oscillators: ['web-audio-oscillators'],
+        },
+      },
+    },
+  },
 });
