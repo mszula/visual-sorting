@@ -1,7 +1,7 @@
 <footer class="footer items-center p-4 bg-base-200">
   <aside class="items-center grid-flow-col">
     <p>
-      Built with ❤️ by <a
+      Built with ☕️ and ❤️ by <a
         class="link"
         href="https://github.com/mszula"
         target="_blank">mszula</a

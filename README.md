@@ -49,7 +49,7 @@ If you have suggestions for how Visual Sorting could be improved, or want to rep
 
 ## 💻 Setup
 
-Made with Svelte, Vite and DaisyUI.
+Built with ☕️ and ❤️ using Svelte, SvelteKit, Vite, Tailwind, and DaisyUI.
 
 Install dependencies:
 
