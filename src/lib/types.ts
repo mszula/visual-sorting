@@ -6,5 +6,5 @@ export type SortElement = {
 
 export type ProgressIndicator = {
   access: number[]; // list of processing indexes
-  sound?: number; // whitch bar should play a sound
+  sound?: number; // which bar should play a sound
 };

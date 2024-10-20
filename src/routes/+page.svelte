@@ -48,18 +48,17 @@
     $running && oscillatorType ? soundStart(size, oscillatorType) : soundStop();
   }
   $: {
-    browser && window.clearInterval(intervalRef);
-    if ($running) {
-      intervalRef =
-        browser &&
-        window.setInterval(() => {
+    if (browser) {
+      window.clearInterval(intervalRef);
+      if ($running) {
+        intervalRef = window.setInterval(() => {
           // Magic calculation which calculate how many steps function should do for each tick
           const steps = delay < 2 ? 100 - ((delay * 10 - 1) * 98) / 18 : 1;
           for (let i = 0; i < steps; i++) {
             const next = algorithm.instance.next();
 
             if (next.done) {
-              browser && window.clearInterval(intervalRef);
+              window.clearInterval(intervalRef);
               reset();
 
               break;
@@ -67,6 +66,7 @@
             next.value && updateBars($arrayToSort, next.value);
           }
         }, delay);
+      }
     }
   }
 

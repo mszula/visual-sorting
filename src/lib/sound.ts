@@ -18,6 +18,10 @@ export const soundStart = (
   size: number,
   oscillatorName: NonNullable<OscillatorType>
 ) => {
+  if (!context) {
+    return;
+  }
+
   freqStepSize = maxFrequency / size;
   if (oscillator) {
     soundStop();
