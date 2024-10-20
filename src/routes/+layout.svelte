@@ -1,16 +1,9 @@
 <svelte:head>
   <script
-    src="https://www.googletagmanager.com/gtag/js?id=G-C25VS7L111"
-    async
+    defer
+    src="https://cloud.umami.is/script.js"
+    data-website-id="20c04633-41a0-49d1-abe1-682761311f51"
   ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-C25VS7L111');
-  </script>
 
   <meta property="og:title" content="Visual Sorting aka The Sound Of Sorting" />
   <meta property="og:type" content="website" />
