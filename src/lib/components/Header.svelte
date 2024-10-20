@@ -2,6 +2,7 @@
   import HeaderSoundControl from './HeaderSoundControl.svelte';
   import { type OscillatorType } from '../sound';
   import HeaderThemeControl from './HeaderThemeControl.svelte';
+  import { base } from '$app/paths';
 
   export let selectedTheme: string;
   export let oscillatorType: OscillatorType;
@@ -9,7 +10,7 @@
 
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a class="btn btn-ghost" href="/">
+    <a class="btn btn-ghost" href="{base}/">
       <span class="text-lg md:text-xl"
         >Visual Sorting <span class="text-sm">aka The Sound Of Sorting</span
         ></span

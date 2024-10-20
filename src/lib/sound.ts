@@ -2,10 +2,11 @@ import {
   customOscillators,
   customOscillatorTypes,
 } from 'web-audio-oscillators';
+import { browser } from '$app/environment';
 
 export type OscillatorType = (typeof customOscillatorTypes)[number] | null;
 
-const context = new AudioContext();
+const context = browser && new AudioContext();
 
 let oscillator: OscillatorNode;
 let freqStepSize = 0;

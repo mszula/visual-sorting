@@ -1,5 +1,5 @@
 <script lang="ts">
-  import themes from '../../../themes';
+  import themes from '../../themes.js';
   import { handleMenuOutsideClick } from './menu-outside-click-handler';
 
   export let selectedTheme: string;

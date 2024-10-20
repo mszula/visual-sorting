@@ -1,26 +1,27 @@
 <script lang="ts">
-  import './app.css';
-  import { generateArray, shuffle } from './lib/randomized-array-generator';
-  import type { ProgressIndicator, SortElement } from './lib/types';
-  import Header from './lib/components/Header.svelte';
+  import '../app.css';
+  import { generateArray, shuffle } from '../lib/randomized-array-generator';
+  import type { ProgressIndicator, SortElement } from '../lib/types';
+  import Header from '../lib/components/Header.svelte';
   import { onMount, tick } from 'svelte';
   import { themeChange } from 'theme-change';
   import daisyuiColors from 'daisyui/src/theming/themes';
   import type { Theme } from 'daisyui';
-  import AlgorithmSelector from './lib/components/AlgorithmSelector.svelte';
-  import ControlButtons from './lib/components/ControlButtons.svelte';
-  import RangeArraySize from './lib/components/RangeArraySize.svelte';
-  import RangeDelay from './lib/components/RangeDelay.svelte';
-  import Footer from './lib/components/Footer.svelte';
-  import BarsRender from './lib/components/BarsRender.svelte';
+  import AlgorithmSelector from '../lib/components/AlgorithmSelector.svelte';
+  import ControlButtons from '../lib/components/ControlButtons.svelte';
+  import RangeArraySize from '../lib/components/RangeArraySize.svelte';
+  import RangeDelay from '../lib/components/RangeDelay.svelte';
+  import Footer from '../lib/components/Footer.svelte';
+  import BarsRender from '../lib/components/BarsRender.svelte';
   import type {
     AlgorithmDefinition,
     SortingGenerator,
-  } from './lib/sort-algorithms/types';
-  import { arrayToSort, running } from './states';
-  import { soundStart, soundStop, type OscillatorType } from './lib/sound';
+  } from '../lib/sort-algorithms/types';
+  import { arrayToSort, running } from '../states';
+  import { soundStart, soundStop, type OscillatorType } from '../lib/sound';
+  import { browser } from '$app/environment';
 
-  let selectedTheme = 'dim';
+  let selectedTheme: Theme = 'dim';
   let size = 300;
   let delay = 2;
   let bars: SortElement[];
@@ -30,14 +31,15 @@
 
   onMount(() => {
     themeChange(false);
-    selectedTheme = document.documentElement.dataset.theme || selectedTheme;
+    selectedTheme =
+      (document.documentElement.dataset.theme as Theme) || selectedTheme;
     const barsContainer = document.getElementById('bars-container');
     if (barsContainer) {
       barsContainer.style.height = `${barsContainer.offsetHeight}px`;
     }
   });
 
-  $: theme = daisyuiColors[selectedTheme as Theme];
+  $: theme = daisyuiColors[selectedTheme];
   $: {
     $arrayToSort = shuffle(generateArray(size));
     reset();
@@ -46,22 +48,25 @@
     $running && oscillatorType ? soundStart(size, oscillatorType) : soundStop();
   }
   $: {
-    window.clearInterval(intervalRef);
+    browser && window.clearInterval(intervalRef);
     if ($running) {
-      intervalRef = window.setInterval(() => {
-        // Magic calculation which calculate how many steps function should do for each tick
-        const steps = delay < 2 ? 100 - ((delay * 10 - 1) * 98) / 18 : 1;
-        for (let i = 0; i < steps; i++) {
-          const next = algorithm.instance.next();
-          if (next.done) {
-            clearInterval(intervalRef);
-            reset();
+      intervalRef =
+        browser &&
+        window.setInterval(() => {
+          // Magic calculation which calculate how many steps function should do for each tick
+          const steps = delay < 2 ? 100 - ((delay * 10 - 1) * 98) / 18 : 1;
+          for (let i = 0; i < steps; i++) {
+            const next = algorithm.instance.next();
 
-            break;
+            if (next.done) {
+              browser && window.clearInterval(intervalRef);
+              reset();
+
+              break;
+            }
+            next.value && updateBars($arrayToSort, next.value);
           }
-          updateBars($arrayToSort, next.value);
-        }
-      }, delay);
+        }, delay);
     }
   }
 
@@ -90,7 +95,7 @@
     const next = algorithm.instance.next();
     if (!next.done) {
       oscillatorType && soundStart(size, oscillatorType);
-      updateBars($arrayToSort, next.value);
+      next.value && updateBars($arrayToSort, next.value);
       setTimeout(soundStop, 100);
     }
   };
