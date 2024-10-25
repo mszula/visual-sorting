@@ -126,7 +126,7 @@
           <MobileAlgorithmSelector {selectAlgorithm} />
         </div>
         <div
-          class="grid flex-row flex-grow card bg-base-300 rounded-box place-items-center p-5 lg:mb-2"
+          class="flex flex-row flex-grow card bg-base-300 rounded-box place-items-center p-5 lg:mb-2"
         >
           <div
             class="flex flex-col w-full justify-between items-center lg:flex-row"
