@@ -20,6 +20,7 @@
   import { arrayToSort, running } from '../states';
   import { soundStart, soundStop, type OscillatorType } from '../lib/sound';
   import { browser } from '$app/environment';
+  import MobileAlgorithmSelector from '$lib/components/mobile/MobileAlgorithmSelector.svelte';
 
   let selectedTheme: Theme = 'dim';
   let size = 300;
@@ -118,14 +119,19 @@
     </div>
     <div class="flex mx-2 mb-2 md:mx-5 md:mb-5">
       <div class="flex flex-wrap w-full flex-col md:flex-row">
-        <AlgorithmSelector {selectAlgorithm} />
+        <div class="hidden md:flex">
+          <AlgorithmSelector {selectAlgorithm} />
+        </div>
+        <div class="md:hidden">
+          <MobileAlgorithmSelector {selectAlgorithm} />
+        </div>
         <div
-          class="grid flex-row flex-grow card bg-base-300 rounded-box place-items-center p-5 mb-2 md:mb-0"
+          class="grid flex-row flex-grow card bg-base-300 rounded-box place-items-center p-5 lg:mb-2"
         >
           <div
             class="flex flex-col w-full justify-between items-center lg:flex-row"
           >
-            <div class="flex mr-5 md:flex-col items-center w-full lg:w-auto">
+            <div class="flex lg:mr-5 flex-col items-center w-full lg:w-auto">
               <ControlButtons {reset} {size} {step} />
             </div>
             <div class="flex grow flex-col w-full lg:w-auto">

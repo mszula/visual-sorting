@@ -5,8 +5,14 @@
 body {
   max-width: 100%;
   overflow-x: hidden;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 .range:disabled {
   opacity: 0.5;
+}
+
+html {
+  height: -webkit-fill-available;
 }
