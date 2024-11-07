@@ -4,7 +4,6 @@ Visual Sorting is a tool that provides a visualization of sorting algorithms, ac
 
 https://github.com/user-attachments/assets/2b9674c5-c705-4a22-ba6a-474cfc11cddd
 
-
 ## 🚀 Play with it
 
 [https://mszula.github.io/visual-sorting/](https://mszula.github.io/visual-sorting/)
