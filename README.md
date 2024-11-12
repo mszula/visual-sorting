@@ -19,25 +19,25 @@ https://github.com/user-attachments/assets/2b9674c5-c705-4a22-ba6a-474cfc11cddd
 
 ## 🤖 Supported Sorting Algorithms
 
-- Bubble Sort
-- Quick Sort
-- Shell Sort
-- Merge Sort
-- Insertion Sort
-- Selection Sort
-- Radix LSD Sort
-- Radix MSD Sort
-- Heap Sort
-- Bitonic Sort
-- Tim Sort
-- Gnome Sort
-- Cycle Sort
-- Cocktail Sort
-- Pancake Sort
-- Stooge Sort
-- Bogo Sort
-- Exchange Sort
-- Odd Even Sort
+- [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
+- [Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
+- [Shell Sort](https://en.wikipedia.org/wiki/Shellsort)
+- [Merge Sort](https://en.wikipedia.org/wiki/Merge_sort)
+- [Insertion Sort](https://en.wikipedia.org/wiki/Insertion_sort)
+- [Selection Sort](https://en.wikipedia.org/wiki/Selection_sort)
+- [Radix LSD Sort](https://en.wikipedia.org/wiki/Radix_sort#Least_significant_digit_radix_sorts)
+- [Radix MSD Sort](https://en.wikipedia.org/wiki/Radix_sort#Most_significant_digit_radix_sorts)
+- [Heap Sort](https://en.wikipedia.org/wiki/Heapsort)
+- [Bitonic Sort](https://en.wikipedia.org/wiki/Bitonic_sorter)
+- [Tim Sort](https://en.wikipedia.org/wiki/Timsort)
+- [Gnome Sort](https://en.wikipedia.org/wiki/Gnome_sort)
+- [Cycle Sort](https://en.wikipedia.org/wiki/Cycle_sort)
+- [Cocktail Sort](https://en.wikipedia.org/wiki/Cocktail_shaker_sort)
+- [Pancake Sort](https://en.wikipedia.org/wiki/Pancake_sorting)
+- [Stooge Sort](https://en.wikipedia.org/wiki/Stooge_sort)
+- [Bogo Sort](https://en.wikipedia.org/wiki/Bogosort)
+- [Exchange Sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Exchange_sort)
+- [Odd-Even Sort](https://en.wikipedia.org/wiki/Odd%E2%80%93even_sort)
 
 ## 🔍 Rationale
 
