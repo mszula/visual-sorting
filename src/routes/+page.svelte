@@ -21,6 +21,7 @@
   import { soundStart, soundStop, type OscillatorType } from '../lib/sound';
   import { browser } from '$app/environment';
   import MobileAlgorithmSelector from '$lib/components/mobile/MobileAlgorithmSelector.svelte';
+  import LeaveAStarModal from '$lib/components/LeaveAStarModal.svelte';
 
   let selectedTheme: Theme = 'dim';
   let size = 300;
@@ -151,4 +152,5 @@
     </div>
     <Footer />
   </div>
+  <LeaveAStarModal />
 </main>
