@@ -4,6 +4,7 @@
 
   let ref: HTMLDialogElement;
   let timedOut = false;
+  let showed = false;
 
   onMount(() => {
     if (localStorage.getItem('leaved-a-star')) {
@@ -15,8 +16,9 @@
     }, 60 * 1000);
   });
 
-  $: if (!$running && timedOut) {
+  $: if (!$running && timedOut && !showed) {
     ref.showModal();
+    showed = true;
   }
 
   const click = () => {
