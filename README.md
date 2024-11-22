@@ -65,6 +65,10 @@ npm run dev
 
 And that's it 😄
 
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=mszula/visual-sorting&type=Date)](https://star-history.com/#mszula/visual-sorting&Date)
+
 ## 📄 License
 
 [ISC](https://github.com/mszula/visual-sorting/blob/main/LICENSE) © 2024 Mateusz Szuła
