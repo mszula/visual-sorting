@@ -1,5 +1,7 @@
 <script lang="ts">
   export let selectAlgorithm: (algo: AlgorithmDefinition) => void;
+  export let selectedAlgorithm: AlgorithmDefinition;
+
   import { algorithms } from '../../sort-algorithms/algorithms';
   import type { AlgorithmDefinition } from '../../sort-algorithms/types';
 
@@ -16,7 +18,10 @@
   >
     {#each algorithms as algos, group}
       {#each algos as algo, index}
-        <option value={[group, index]}>{algo.name}</option>
+        <option
+          value={[group, index]}
+          selected={algo.name === selectedAlgorithm?.name}>{algo.name}</option
+        >
       {/each}
     {/each}
   </select>

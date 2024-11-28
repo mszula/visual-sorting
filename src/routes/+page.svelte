@@ -22,6 +22,7 @@
   import { browser } from '$app/environment';
   import MobileAlgorithmSelector from '$lib/components/mobile/MobileAlgorithmSelector.svelte';
   import LeaveAStarModal from '$lib/components/LeaveAStarModal.svelte';
+  import { algorithms } from '$lib/sort-algorithms/algorithms';
 
   let selectedTheme: Theme = 'dim';
   let size = 300;
@@ -38,6 +39,24 @@
     const barsContainer = document.getElementById('bars-container');
     if (barsContainer) {
       barsContainer.style.height = `${barsContainer.offsetHeight}px`;
+    }
+
+    const selectedAlgorithm = new URL(
+      window.location.toString()
+    ).searchParams.get('algorithm');
+
+    if (!selectedAlgorithm) {
+      selectAlgorithm(algorithms[0][0]);
+    } else {
+      const algo = algorithms
+        .flat()
+        .find(
+          (a) => a.name.toLowerCase().replace(/ /g, '-') === selectedAlgorithm
+        );
+
+      if (algo) {
+        selectAlgorithm(algo);
+      }
     }
   });
 
@@ -105,6 +124,13 @@
   const selectAlgorithm = (algo: AlgorithmDefinition) => {
     reset();
     algorithm = { ...algo, instance: algo.function($arrayToSort) };
+
+    const url = new URL(window.location.toString());
+    url.searchParams.set(
+      'algorithm',
+      algo.name.toLowerCase().replace(/ /g, '-')
+    );
+    history.pushState({}, '', url);
   };
 </script>
 
@@ -121,10 +147,13 @@
     <div class="flex mx-2 mb-2 md:mx-5 md:mb-5">
       <div class="flex flex-wrap w-full flex-col md:flex-row">
         <div class="hidden md:flex">
-          <AlgorithmSelector {selectAlgorithm} />
+          <AlgorithmSelector {selectAlgorithm} selectedAlgorithm={algorithm} />
         </div>
         <div class="md:hidden">
-          <MobileAlgorithmSelector {selectAlgorithm} />
+          <MobileAlgorithmSelector
+            {selectAlgorithm}
+            selectedAlgorithm={algorithm}
+          />
         </div>
         <div
           class="flex flex-row flex-grow card bg-base-300 rounded-box place-items-center p-5 lg:mb-2"

@@ -1,23 +1,15 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   export let selectAlgorithm: (algo: AlgorithmDefinition) => void;
+  export let selectedAlgorithm: AlgorithmDefinition;
+
   import { algorithms } from '../sort-algorithms/algorithms';
   import type { AlgorithmDefinition } from '../sort-algorithms/types';
   import ArrowRight from './algorithm-selector/ArrowRight.svelte';
   import ArrowLeft from './algorithm-selector/ArrowLeft.svelte';
 
-  let selected = 0;
-  let selectedGroup = 0;
-
-  const click = (group: number, index: number) => () => {
-    selected = index;
-    selectedGroup = group;
-    selectAlgorithm(algorithms[group][index]);
+  const click = (algo: AlgorithmDefinition) => () => {
+    selectAlgorithm(algo);
   };
-
-  onMount(() => {
-    selectAlgorithm(algorithms[selectedGroup][selected]);
-  });
 </script>
 
 <div class="flex bg-base-200 rounded-box mb-2 md:mb-0 md:mr-5">
@@ -28,10 +20,8 @@
           {#each algos as algo, index}
             <li>
               <button
-                class={selected === index && selectedGroup === group
-                  ? 'active'
-                  : ''}
-                on:click={click(group, index)}>{algo.name}</button
+                class={algo.name === selectedAlgorithm?.name ? 'active' : ''}
+                on:click={click(algo)}>{algo.name}</button
               >
             </li>
             {#if index === 2 && group > 0}
