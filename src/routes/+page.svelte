@@ -46,7 +46,7 @@
     ).searchParams.get('algorithm');
 
     if (!selectedAlgorithm) {
-      selectAlgorithm(algorithms[0][0]);
+      selectAlgorithm(algorithms[0][0], false);
     } else {
       const algo = algorithms
         .flat()
@@ -55,7 +55,7 @@
         );
 
       if (algo) {
-        selectAlgorithm(algo);
+        selectAlgorithm(algo, false);
       }
     }
   });
@@ -121,16 +121,21 @@
     }
   };
 
-  const selectAlgorithm = (algo: AlgorithmDefinition) => {
+  const selectAlgorithm = (
+    algo: AlgorithmDefinition,
+    setSearchParams = true
+  ) => {
     reset();
     algorithm = { ...algo, instance: algo.function($arrayToSort) };
 
-    const url = new URL(window.location.toString());
-    url.searchParams.set(
-      'algorithm',
-      algo.name.toLowerCase().replace(/ /g, '-')
-    );
-    history.pushState({}, '', url);
+    if (setSearchParams) {
+      const url = new URL(window.location.toString());
+      url.searchParams.set(
+        'algorithm',
+        algo.name.toLowerCase().replace(/ /g, '-')
+      );
+      history.pushState({}, '', url);
+    }
   };
 </script>
 
