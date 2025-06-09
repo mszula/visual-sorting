@@ -1,8 +1,8 @@
 <svelte:head>
   <script
     defer
-    src="https://cloud.umami.is/script.js"
-    data-website-id="20c04633-41a0-49d1-abe1-682761311f51"
+    src="https://umami.szula.top/script.js"
+    data-website-id="bf5d6c23-719c-4412-a957-eb05e36cfbc3"
   ></script>
 
   <meta property="og:title" content="Visual Sorting aka The Sound Of Sorting" />
