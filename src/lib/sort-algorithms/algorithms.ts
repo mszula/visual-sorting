@@ -3,11 +3,14 @@ import { bitonicSort } from './bitonic-sort';
 import { bogoSort } from './bogo-sort';
 import { bubleSort } from './buble-sort';
 import { cocktailSort } from './cocktail-sort';
+import { combSort } from './comb-sort';
+import { countingSort } from './counting-sort';
 import { cycleSort } from './cycle-sort';
 import { exchangeSort } from './exchange-sort';
 import { gnomeSort } from './gnome-sort';
 import { heapSort } from './heap-sort';
 import { insertionSort } from './insertion-sort';
+import { introSort } from './intro-sort';
 import { mergeSort } from './merge-sort';
 import { oddEvenSort } from './odd-even-sort';
 import { pancakeSort } from './pancake-sort';
@@ -100,6 +103,21 @@ export const algorithms: AlgorithmDefinition[][] = [
     {
       name: 'Odd Even Sort',
       function: oddEvenSort,
+    },
+    {
+      name: 'Counting Sort',
+      function: countingSort,
+      badge: 'new',
+    },
+    {
+      name: 'Comb Sort',
+      function: combSort,
+      badge: 'new',
+    },
+    {
+      name: 'Intro Sort',
+      function: introSort,
+      badge: 'new',
     },
   ],
 ];

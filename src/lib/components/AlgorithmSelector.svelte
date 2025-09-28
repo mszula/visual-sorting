@@ -21,8 +21,17 @@
             <li>
               <button
                 class={algo.name === selectedAlgorithm?.name ? 'active' : ''}
-                on:click={click(algo)}>{algo.name}</button
+                on:click={click(algo)}
               >
+                <span class="flex items-center gap-2">
+                  {algo.name}
+                  {#if algo.badge}
+                    <span class="badge badge-primary badge-sm"
+                      >{algo.badge}</span
+                    >
+                  {/if}
+                </span>
+              </button>
             </li>
             {#if index === 2 && group > 0}
               <ArrowLeft {group} />

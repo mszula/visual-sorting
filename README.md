@@ -39,6 +39,12 @@ https://github.com/user-attachments/assets/2b9674c5-c705-4a22-ba6a-474cfc11cddd
 - [Exchange Sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Exchange_sort)
 - [Odd-Even Sort](https://en.wikipedia.org/wiki/Odd%E2%80%93even_sort)
 
+### 🆕 Recently Added Algorithms
+
+- [Counting Sort](https://en.wikipedia.org/wiki/Counting_sort) - Non-comparison sorting algorithm that counts occurrences of each value
+- [Comb Sort](https://en.wikipedia.org/wiki/Comb_sort) - Improved Bubble Sort variant that uses gap-based comparisons
+- [Intro Sort](https://en.wikipedia.org/wiki/Introsort) - Hybrid algorithm combining Quick Sort, Heap Sort, and Insertion Sort
+
 ## 🔍 Rationale
 
 Visual Sorting was created to explore and learn Svelte, a modern JavaScript framework. Inspired by Timo Bingmann's captivating video "The Sound of Sorting" (https://www.youtube.com/watch?v=kPRA0W1kECg), which combines sorting algorithm visualizations with sound, I wanted to develop a tool that offers a similar educational and engaging experience. Visual Sorting aims to make learning sorting algorithms both enjoyable and insightful through dynamic visuals and sounds.

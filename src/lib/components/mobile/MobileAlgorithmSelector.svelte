@@ -20,8 +20,11 @@
       {#each algos as algo, index}
         <option
           value={[group, index]}
-          selected={algo.name === selectedAlgorithm?.name}>{algo.name}</option
+          selected={algo.name === selectedAlgorithm?.name}
         >
+          {algo.name}{#if algo.badge}
+            ({algo.badge}){/if}
+        </option>
       {/each}
     {/each}
   </select>
