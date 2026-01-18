@@ -26,11 +26,11 @@
   const click = () => {
     localStorage.setItem('leaved-a-star', 'yup');
     ref.close();
-    trackEvent('modal-action', { modal: 'github-star', action: 'star-clicked' });
+    trackEvent('modal-action-github', { action: 'star-clicked' });
   };
 
   const dismiss = () => {
-    trackEvent('modal-action', { modal: 'github-star', action: 'maybe-later' });
+    trackEvent('modal-action-github', { action: 'maybe-later' });
   };
 </script>
 

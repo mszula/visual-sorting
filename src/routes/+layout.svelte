@@ -1,7 +1,7 @@
 <svelte:head>
   <script
     defer
-    src="https://umami.szula.top/script.js"
+    src="https://analytics.szula.top/script.js"
     data-website-id="bf5d6c23-719c-4412-a957-eb05e36cfbc3"
   ></script>
 

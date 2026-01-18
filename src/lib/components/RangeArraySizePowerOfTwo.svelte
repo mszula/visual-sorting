@@ -14,7 +14,7 @@
   }
 
   const handleChange = () => {
-    trackEvent('array-size-changed', { size, type: 'power-of-two' });
+    trackEvent('array-size-changed', { size });
   };
 </script>
 

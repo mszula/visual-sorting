@@ -10,7 +10,7 @@
     const [group, index] = value.split(',');
     const algo = algorithms[Number(group)][Number(index)];
     selectAlgorithm(algo);
-    trackEvent('algorithm-selected', { algorithm: algo.name, device: 'mobile' });
+    trackEvent('algorithm-selected', { algorithm: algo.name });
   };
 </script>
 

@@ -26,13 +26,13 @@
   const handleClick = () => {
     localStorage.setItem('kofi-support-shown', 'true');
     ref.close();
-    trackEvent('modal-action', { modal: 'kofi-support', action: 'kofi-clicked' });
+    trackEvent('modal-action-kofi', { action: 'kofi-clicked' });
   };
 
   const handleDismiss = () => {
     localStorage.setItem('kofi-support-shown', 'true');
     ref.close();
-    trackEvent('modal-action', { modal: 'kofi-support', action: 'maybe-later' });
+    trackEvent('modal-action-kofi', { action: 'maybe-later' });
   };
 </script>
 
