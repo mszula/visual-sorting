@@ -1,6 +1,7 @@
 <script lang="ts">
   import themes from '../../themes.js';
   import { handleMenuOutsideClick } from './menu-outside-click-handler';
+  import { trackEvent } from '../umami';
 
   export let selectedTheme: string;
 
@@ -14,6 +15,7 @@
     selectedTheme = e.currentTarget.dataset.setTheme || 'dim';
 
     document.documentElement.setAttribute('data-theme', selectedTheme);
+    trackEvent('theme-changed', { theme: selectedTheme });
   };
 </script>
 

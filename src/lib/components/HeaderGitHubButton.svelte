@@ -1,7 +1,16 @@
+<script lang="ts">
+  import { trackEvent } from '../umami';
+
+  const handleClick = () => {
+    trackEvent('external-link', { destination: 'github-repo' });
+  };
+</script>
+
 <a
   class="lg:btn lg:btn-square lg:btn-ghost"
   href="https://github.com/mszula/visual-sorting"
   target="_blank"
+  on:click={handleClick}
 >
   <svg
     class="w-[24px] h-[24px]"

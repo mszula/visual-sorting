@@ -2,6 +2,11 @@
   export let size: number;
 
   import { running } from '../../states';
+  import { trackEvent } from '../umami';
+
+  const handleChange = () => {
+    trackEvent('array-size-changed', { size });
+  };
 </script>
 
 <label class="form-control w-full mb-2">
@@ -18,5 +23,6 @@
     min="2"
     type="range"
     bind:value={size}
+    on:change={handleChange}
   />
 </label>

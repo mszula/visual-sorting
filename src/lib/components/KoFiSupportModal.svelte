@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { running } from '../../states';
+  import { trackEvent } from '../umami';
 
   let ref: HTMLDialogElement;
   let timedOut = false;
@@ -19,16 +20,19 @@
   $: if (!$running && timedOut && !showed) {
     ref.showModal();
     showed = true;
+    trackEvent('modal-shown', { modal: 'kofi-support' });
   }
 
   const handleClick = () => {
     localStorage.setItem('kofi-support-shown', 'true');
     ref.close();
+    trackEvent('modal-action', { modal: 'kofi-support', action: 'kofi-clicked' });
   };
 
   const handleDismiss = () => {
     localStorage.setItem('kofi-support-shown', 'true');
     ref.close();
+    trackEvent('modal-action', { modal: 'kofi-support', action: 'maybe-later' });
   };
 </script>
 

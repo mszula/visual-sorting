@@ -2,6 +2,7 @@
   import { customOscillatorTypes } from 'web-audio-oscillators';
   import { type OscillatorType } from '../sound';
   import { handleMenuOutsideClick } from './menu-outside-click-handler';
+  import { trackEvent } from '../umami';
 
   export let oscillatorType: OscillatorType;
 
@@ -13,6 +14,11 @@
       /([0-9])/g,
       ' $1'
     );
+  };
+
+  const changeSound = (type: OscillatorType) => {
+    oscillatorType = type;
+    trackEvent('sound-changed', { type: type || 'none' });
   };
 
   let ref: HTMLDetailsElement;
@@ -67,7 +73,7 @@
       <button
         class={!oscillatorType ? 'btn-active' : ''}
         data-sound-select
-        on:click={() => (oscillatorType = null)}>None</button
+        on:click={() => changeSound(null)}>None</button
       >
     </li>
     {#each customOscillatorTypes as osc}
@@ -75,9 +81,7 @@
         <button
           class={osc === oscillatorType ? 'btn-active' : ''}
           data-sound-select
-          on:click={() => {
-            oscillatorType = osc;
-          }}>{getOscillatorName(osc)}</button
+          on:click={() => changeSound(osc)}>{getOscillatorName(osc)}</button
         >
       </li>
     {/each}

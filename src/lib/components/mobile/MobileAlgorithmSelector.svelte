@@ -4,10 +4,13 @@
 
   import { algorithms } from '../../sort-algorithms/algorithms';
   import type { AlgorithmDefinition } from '../../sort-algorithms/types';
+  import { trackEvent } from '../../umami';
 
   const change = (value: string) => {
     const [group, index] = value.split(',');
-    selectAlgorithm(algorithms[Number(group)][Number(index)]);
+    const algo = algorithms[Number(group)][Number(index)];
+    selectAlgorithm(algo);
+    trackEvent('algorithm-selected', { algorithm: algo.name, device: 'mobile' });
   };
 </script>
 

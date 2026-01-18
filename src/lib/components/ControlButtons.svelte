@@ -5,17 +5,23 @@
 
   import { arrayToSort, running } from '../../states';
   import { generateArray, shuffle } from '../randomized-array-generator';
+  import { trackEvent } from '../umami';
 
-  const start = () => ($running = !$running);
+  const start = () => {
+    $running = !$running;
+    trackEvent('sort-control', { action: $running ? 'start' : 'stop' });
+  };
 
   const reverse = () => {
     $arrayToSort = generateArray(size).reverse();
     reset();
+    trackEvent('array-pattern', { pattern: 'reverse' });
   };
 
   const shuffleClick = () => {
     $arrayToSort = shuffle(generateArray(size));
     reset();
+    trackEvent('array-pattern', { pattern: 'shuffle' });
   };
 
   const oddsEvens = () =>
@@ -34,6 +40,7 @@
     $arrayToSort = [...odds.reverse(), ...evens];
 
     reset();
+    trackEvent('array-pattern', { pattern: 'valley' });
   };
 
   const mountain = () => {
@@ -41,6 +48,12 @@
     $arrayToSort = [...odds, ...evens.reverse()];
 
     reset();
+    trackEvent('array-pattern', { pattern: 'mountain' });
+  };
+
+  const stepClick = () => {
+    step();
+    trackEvent('sort-control', { action: 'step' });
   };
 </script>
 
@@ -52,7 +65,7 @@
         : 'btn-primary'} lg:btn-lg lg:w-24"
       on:click={start}>{$running ? 'Stop' : 'Start'}</button
     >
-    <button class="btn join-item lg:btn-lg lg:w-24" on:click={step}>Step</button
+    <button class="btn join-item lg:btn-lg lg:w-24" on:click={stepClick}>Step</button
     >
   </div>
   <button class="btn lg:btn-lg" on:click={shuffleClick}>Shuffle</button>

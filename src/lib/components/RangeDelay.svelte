@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { trackEvent } from '../umami';
+
   export let realDelay: number;
   let delay: number = 20;
 
@@ -26,6 +28,10 @@
     return delay;
   };
 
+  const handleChange = () => {
+    trackEvent('delay-changed', { delay: realDelay });
+  };
+
   $: realDelay = getRealDelay(delay);
 </script>
 
@@ -43,5 +49,6 @@
     step="0.1"
     type="range"
     bind:value={delay}
+    on:change={handleChange}
   />
 </label>

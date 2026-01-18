@@ -6,9 +6,11 @@
   import type { AlgorithmDefinition } from '../sort-algorithms/types';
   import ArrowRight from './algorithm-selector/ArrowRight.svelte';
   import ArrowLeft from './algorithm-selector/ArrowLeft.svelte';
+  import { trackEvent } from '../umami';
 
   const click = (algo: AlgorithmDefinition) => () => {
     selectAlgorithm(algo);
+    trackEvent('algorithm-selected', { algorithm: algo.name });
   };
 </script>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { running } from '../../states';
+  import { trackEvent } from '../umami';
 
   let ref: HTMLDialogElement;
   let timedOut = false;
@@ -19,11 +20,17 @@
   $: if (!$running && timedOut && !showed) {
     ref.showModal();
     showed = true;
+    trackEvent('modal-shown', { modal: 'github-star' });
   }
 
   const click = () => {
     localStorage.setItem('leaved-a-star', 'yup');
     ref.close();
+    trackEvent('modal-action', { modal: 'github-star', action: 'star-clicked' });
+  };
+
+  const dismiss = () => {
+    trackEvent('modal-action', { modal: 'github-star', action: 'maybe-later' });
   };
 </script>
 
@@ -53,7 +60,7 @@
         ⭐️ Star on GitHub
       </a>
       <form method="dialog">
-        <button class="btn">Maybe Later</button>
+        <button class="btn" on:click={dismiss}>Maybe Later</button>
       </form>
     </div>
   </div>

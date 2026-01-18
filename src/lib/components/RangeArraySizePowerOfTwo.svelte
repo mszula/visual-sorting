@@ -2,6 +2,7 @@
   export let size: number;
 
   import { running } from '../../states';
+  import { trackEvent } from '../umami';
 
   const steps = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024];
 
@@ -11,6 +12,10 @@
       Math.abs(curr - size) < Math.abs(prev - size) ? curr : prev
     );
   }
+
+  const handleChange = () => {
+    trackEvent('array-size-changed', { size, type: 'power-of-two' });
+  };
 </script>
 
 <label class="form-control w-full mb-2">
@@ -28,6 +33,7 @@
         type="radio"
         {value}
         bind:group={size}
+        on:change={handleChange}
       />
     {/each}
   </div>
