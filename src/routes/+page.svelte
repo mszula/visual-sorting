@@ -22,6 +22,7 @@
   import { browser } from '$app/environment';
   import MobileAlgorithmSelector from '$lib/components/mobile/MobileAlgorithmSelector.svelte';
   import LeaveAStarModal from '$lib/components/LeaveAStarModal.svelte';
+  import KoFiSupportModal from '$lib/components/KoFiSupportModal.svelte';
   import { algorithms } from '$lib/sort-algorithms/algorithms';
 
   let selectedTheme: Theme = 'dim';
@@ -51,7 +52,8 @@
       const algo = algorithms
         .flat()
         .find(
-          (a) => a.name.toLowerCase().replace(/ /g, '-') === selectedAlgorithm
+          (a: AlgorithmDefinition) =>
+            a.name.toLowerCase().replace(/ /g, '-') === selectedAlgorithm
         );
 
       if (algo) {
@@ -60,7 +62,8 @@
     }
   });
 
-  $: theme = daisyuiColors[selectedTheme];
+  $: theme =
+    (daisyuiColors as any)[selectedTheme] || (daisyuiColors as any).dim;
   $: {
     $arrayToSort = shuffle(generateArray(size));
     reset();
@@ -81,7 +84,7 @@
             if (next.done) {
               window.clearInterval(intervalRef);
               reset();
-
+              
               break;
             }
             next.value && updateBars($arrayToSort, next.value);
@@ -187,4 +190,5 @@
     <Footer />
   </div>
   <LeaveAStarModal />
+  <KoFiSupportModal />
 </main>
