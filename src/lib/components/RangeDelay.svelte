@@ -28,10 +28,6 @@
     return delay;
   };
 
-  const handleChange = () => {
-    trackEvent('delay-changed', { delay: realDelay });
-  };
-
   $: realDelay = getRealDelay(delay);
 </script>
 
@@ -49,6 +45,5 @@
     step="0.1"
     type="range"
     bind:value={delay}
-    on:change={handleChange}
   />
 </label>

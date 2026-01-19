@@ -12,10 +12,6 @@
       Math.abs(curr - size) < Math.abs(prev - size) ? curr : prev
     );
   }
-
-  const handleChange = () => {
-    trackEvent('array-size-changed', { size });
-  };
 </script>
 
 <label class="form-control w-full mb-2">
@@ -33,7 +29,6 @@
         type="radio"
         {value}
         bind:group={size}
-        on:change={handleChange}
       />
     {/each}
   </div>

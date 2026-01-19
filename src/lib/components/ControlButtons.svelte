@@ -9,7 +9,6 @@
 
   const start = () => {
     $running = !$running;
-    trackEvent('sort-control', { action: $running ? 'start' : 'stop' });
   };
 
   const reverse = () => {
@@ -53,7 +52,6 @@
 
   const stepClick = () => {
     step();
-    trackEvent('sort-control', { action: 'step' });
   };
 </script>
 
