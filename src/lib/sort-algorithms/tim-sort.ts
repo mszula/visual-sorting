@@ -1,4 +1,4 @@
-import type { SortingGenerator } from "./types";
+import type { SortingGenerator } from './types';
 
 /**
  * The size at or below which a run is considered "small" and
@@ -25,7 +25,7 @@ function minRunLength(n: number): number {
 /**
  * Sorts a subarray using insertion sort.
  * This is used by Timsort to extend small runs to ensure they are at least minRun long.
- * 
+ *
  * @param arr - The array to sort.
  * @param start - Start index of the subarray.
  * @param end - End index of the subarray (inclusive).
@@ -51,7 +51,7 @@ function* insertionSort(
  * Scans forward from `start` to find a run (ascending or strictly descending).
  * If run is descending, it is reversed.
  * Returns the end index of the run (inclusive).
- * 
+ *
  * @param arr - The array.
  * @param start - Start index to detect run.
  * @param n - Total length of the array.
@@ -99,10 +99,10 @@ function* countRunAndMakeAscending(
 /**
  * Merges two sorted sub-runs:
  *   arr[start..mid] and arr[mid+1..end]
- * 
+ *
  * This is a standard merging procedure but may be enhanced with Timsort's "galloping" optimization.
  * For simplicity, we will not implement galloping here, just a standard merge.
- * 
+ *
  * @param arr - The array.
  * @param start - Start index of first run.
  * @param mid - End index of first run.
@@ -145,7 +145,7 @@ function* merge(
 
 /**
  * Timsort main function:
- * 
+ *
  * Steps:
  * 1. Calculate minRun.
  * 2. Identify natural runs, extend them to length at least minRun with insertion sort.
@@ -191,7 +191,7 @@ export function* timSort(arr: number[]): SortingGenerator {
       const shouldMerge =
         (n > 2 &&
           runStack[n - 3][1] <= runStack[n - 2][1] + runStack[n - 1][1]) ||
-        (lenY <= lenZ);
+        lenY <= lenZ;
 
       if (!shouldMerge) break;
 
