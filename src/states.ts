@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
-import { generateArray, shuffle } from './lib/randomized-array-generator';
+import { applyPattern, type Pattern } from './lib/randomized-array-generator';
 
-export const arrayToSort = writable(shuffle(generateArray(300)));
+export const arrayToSort = writable(applyPattern(300, 'shuffle'));
 
 export const running = writable(false);
+
+export const pattern = writable<Pattern>('shuffle');

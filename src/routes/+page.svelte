@@ -1,6 +1,9 @@
 <script lang="ts">
   import '../app.css';
-  import { generateArray, shuffle } from '../lib/randomized-array-generator';
+  import {
+    applyPattern,
+    type Pattern,
+  } from '../lib/randomized-array-generator';
   import type { ProgressIndicator, SortElement } from '../lib/types';
   import Header from '../lib/components/Header.svelte';
   import { onMount, tick } from 'svelte';
@@ -17,7 +20,7 @@
     AlgorithmDefinition,
     SortingGenerator,
   } from '../lib/sort-algorithms/types';
-  import { arrayToSort, running } from '../states';
+  import { arrayToSort, running, pattern } from '../states';
   import { soundStart, soundStop, playValue, type OscillatorType } from '../lib/sound';
   import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
@@ -71,10 +74,22 @@
   });
 
   $: theme = daisyuiColors[selectedTheme] || daisyuiColors.dim;
-  $: {
-    $arrayToSort = shuffle(generateArray(size));
-    reset();
+
+  let lastSizeApplied = -1;
+  $: if (size !== lastSizeApplied) {
+    lastSizeApplied = size;
+    regenerate();
   }
+
+  const regenerate = () => {
+    $arrayToSort = applyPattern(size, $pattern);
+    reset();
+  };
+
+  const setPattern = (p: Pattern) => {
+    $pattern = p;
+    regenerate();
+  };
   $: {
     $running && oscillatorType ? soundStart(size, oscillatorType) : soundStop();
   }
@@ -188,7 +203,7 @@
             class="flex flex-col w-full justify-between items-center lg:flex-row"
           >
             <div class="flex lg:mr-5 flex-col items-center w-full lg:w-auto">
-              <ControlButtons {reset} {size} {step} />
+              <ControlButtons {setPattern} {step} />
             </div>
             <div class="flex grow flex-col w-full lg:w-auto">
               {#if algorithm?.arraySizeComponent}
