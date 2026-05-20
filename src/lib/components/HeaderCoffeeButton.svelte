@@ -7,7 +7,7 @@
 </script>
 
 <a
-  class="lg:btn lg:btn-square lg:btn-ghost"
+  class="md:btn md:btn-square md:btn-ghost"
   href="https://ko-fi.com/mszula"
   target="_blank"
   on:click={handleClick}
@@ -27,5 +27,5 @@
       d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"
     /><path d="M6 2v2" /></svg
   >
-  <span class="lg:hidden inline">https://ko-fi.com/mszula</span>
+  <span class="md:hidden inline">https://ko-fi.com/mszula</span>
 </a>

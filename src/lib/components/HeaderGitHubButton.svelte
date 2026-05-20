@@ -7,7 +7,7 @@
 </script>
 
 <a
-  class="lg:btn lg:btn-square lg:btn-ghost"
+  class="md:btn md:btn-square md:btn-ghost"
   href="https://github.com/mszula/visual-sorting"
   target="_blank"
   on:click={handleClick}
@@ -28,5 +28,5 @@
     /><path d="M9 18c-4.51 2-5-2-7-2" /></svg
   >
 
-  <span class="lg:hidden inline">https://github.com/mszula/visual-sorting</span>
+  <span class="md:hidden inline">https://github.com/mszula/visual-sorting</span>
 </a>

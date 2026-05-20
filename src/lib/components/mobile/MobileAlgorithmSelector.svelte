@@ -14,9 +14,9 @@
   };
 </script>
 
-<div class="flex bg-base-200 rounded-box mb-2 md:mb-0 md:mr-5">
+<div class="mb-2 md:mb-0 md:mr-5">
   <select
-    class="select select-ghost w-full"
+    class="select select-bordered w-full"
     on:change={(e) => change(e.currentTarget.value)}
   >
     {#each algorithms as algos, group}

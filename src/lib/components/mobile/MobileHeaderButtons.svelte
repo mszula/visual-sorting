@@ -15,7 +15,11 @@
 </script>
 
 <div class="flex-none md:hidden">
-  <button class="btn btn-ghost" on:click={toggleMenu}>
+  <button
+    class="btn btn-square btn-ghost"
+    aria-label="Open menu"
+    on:click={toggleMenu}
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

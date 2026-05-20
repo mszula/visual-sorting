@@ -12,10 +12,11 @@
 </script>
 
 <div class="navbar bg-base-100 relative">
-  <div class="flex-1">
-    <a class="btn btn-ghost" href="{base}/">
-      <span class="text-lg md:text-xl">
-        Visual Sorting <span class="text-sm">aka The Sound Of Sorting</span>
+  <div class="flex-1 min-w-0">
+    <a class="btn btn-ghost px-2 md:px-4" href="{base}/">
+      <span class="text-lg md:text-xl truncate">
+        Visual Sorting
+        <span class="hidden sm:inline text-sm">aka The Sound Of Sorting</span>
       </span>
     </a>
   </div>

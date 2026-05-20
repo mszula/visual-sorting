@@ -45,13 +45,20 @@
   $: if (browser) savePref('size', size);
   $: if (browser) savePref('oscillatorType', oscillatorType);
 
+  const syncBarsHeight = () => {
+    if (!barsContainer) return;
+    // Reset to natural flex height, then freeze in pixels so svelte-canvas
+    // (whose wrapper is height: 100%) gets a definite parent height.
+    barsContainer.style.height = '';
+    barsContainer.style.height = `${barsContainer.offsetHeight}px`;
+  };
+
   onMount(() => {
     themeChange(false);
     selectedTheme =
       (document.documentElement.dataset.theme as Theme) || selectedTheme;
-    if (barsContainer) {
-      barsContainer.style.height = `${barsContainer.offsetHeight}px`;
-    }
+    syncBarsHeight();
+    window.addEventListener('resize', syncBarsHeight);
 
     const selectedAlgorithm = new URL(
       window.location.toString()
@@ -71,6 +78,8 @@
         selectAlgorithm(algo, false);
       }
     }
+
+    return () => window.removeEventListener('resize', syncBarsHeight);
   });
 
   $: theme = daisyuiColors[selectedTheme] || daisyuiColors.dim;
@@ -197,7 +206,7 @@
           />
         </div>
         <div
-          class="flex flex-row flex-grow card bg-base-300 rounded-box place-items-center p-5 lg:mb-2"
+          class="flex flex-row flex-grow card bg-base-300 rounded-box place-items-center p-3 md:p-5 lg:mb-2"
         >
           <div
             class="flex flex-col w-full justify-between items-center lg:flex-row"
