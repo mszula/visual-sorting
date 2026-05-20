@@ -1,6 +1,11 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
+  import { loadPref, savePref } from '../persistence';
+
   export let realDelay: number;
-  let delay: number = 20;
+  let delay: number = loadPref('delay', 20);
+
+  $: if (browser) savePref('delay', delay);
 
   const delayFactors: { max: number; factor: number; precise?: boolean }[] = [
     { max: 20, factor: 1 / 10, precise: true },

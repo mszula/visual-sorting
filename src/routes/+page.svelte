@@ -21,19 +21,26 @@
   import { soundStart, soundStop, playValue, type OscillatorType } from '../lib/sound';
   import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
+  import { loadPref, savePref } from '../lib/persistence';
   import MobileAlgorithmSelector from '$lib/components/mobile/MobileAlgorithmSelector.svelte';
   import LeaveAStarModal from '$lib/components/LeaveAStarModal.svelte';
   import KoFiSupportModal from '$lib/components/KoFiSupportModal.svelte';
   import { algorithms } from '$lib/sort-algorithms/algorithms';
 
   let selectedTheme: Theme = 'dim';
-  let size = 300;
+  let size = loadPref('size', 300);
   let delay = 2;
   let bars: SortElement[];
   let intervalRef: number;
   let algorithm: AlgorithmDefinition & { instance: SortingGenerator };
-  let oscillatorType: OscillatorType = 'triangle';
+  let oscillatorType: OscillatorType = loadPref<OscillatorType>(
+    'oscillatorType',
+    'triangle'
+  );
   let barsContainer: HTMLDivElement | undefined;
+
+  $: if (browser) savePref('size', size);
+  $: if (browser) savePref('oscillatorType', oscillatorType);
 
   onMount(() => {
     themeChange(false);
