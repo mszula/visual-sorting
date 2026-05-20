@@ -5,7 +5,6 @@
   import { Canvas, Layer, type Render } from "svelte-canvas";
   import type { SortElement } from "../types";
   import type { CustomTheme } from "daisyui";
-  import { playValue } from "../sound";
 
   let render: Render;
   $: render = ({ context, width, height }) => {
@@ -26,9 +25,6 @@
         context.fillStyle = theme["neutral-content"] || theme["neutral"];
       }
 
-      if (bars[currentBar].makeSound) {
-        playValue(bars[currentBar].value);
-      }
       context.fillRect(
         currentBar * (barWidth + spaceWidth),
         height - barSize,

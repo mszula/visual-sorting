@@ -18,8 +18,9 @@
     SortingGenerator,
   } from '../lib/sort-algorithms/types';
   import { arrayToSort, running } from '../states';
-  import { soundStart, soundStop, type OscillatorType } from '../lib/sound';
+  import { soundStart, soundStop, playValue, type OscillatorType } from '../lib/sound';
   import { browser } from '$app/environment';
+  import { goto } from '$app/navigation';
   import MobileAlgorithmSelector from '$lib/components/mobile/MobileAlgorithmSelector.svelte';
   import LeaveAStarModal from '$lib/components/LeaveAStarModal.svelte';
   import KoFiSupportModal from '$lib/components/KoFiSupportModal.svelte';
@@ -32,12 +33,12 @@
   let intervalRef: number;
   let algorithm: AlgorithmDefinition & { instance: SortingGenerator };
   let oscillatorType: OscillatorType = 'triangle';
+  let barsContainer: HTMLDivElement | undefined;
 
   onMount(() => {
     themeChange(false);
     selectedTheme =
       (document.documentElement.dataset.theme as Theme) || selectedTheme;
-    const barsContainer = document.getElementById('bars-container');
     if (barsContainer) {
       barsContainer.style.height = `${barsContainer.offsetHeight}px`;
     }
@@ -62,8 +63,7 @@
     }
   });
 
-  $: theme =
-    (daisyuiColors as any)[selectedTheme] || (daisyuiColors as any).dim;
+  $: theme = daisyuiColors[selectedTheme] || daisyuiColors.dim;
   $: {
     $arrayToSort = shuffle(generateArray(size));
     reset();
@@ -84,10 +84,15 @@
             if (next.done) {
               window.clearInterval(intervalRef);
               reset();
-              
+
               break;
             }
-            next.value && updateBars($arrayToSort, next.value);
+            if (next.value) {
+              updateBars($arrayToSort, next.value);
+              if (next.value.sound !== undefined) {
+                playValue($arrayToSort[next.value.sound]);
+              }
+            }
           }
         }, delay);
       }
@@ -98,7 +103,6 @@
     bars = [...b].map((v, i) => ({
       value: v,
       access: p.access.includes(i),
-      makeSound: p?.sound === i,
     }));
   };
 
@@ -118,8 +122,15 @@
 
     const next = algorithm.instance.next();
     if (!next.done) {
-      oscillatorType && soundStart(size, oscillatorType);
-      next.value && updateBars($arrayToSort, next.value);
+      if (oscillatorType) {
+        soundStart(size, oscillatorType);
+      }
+      if (next.value) {
+        updateBars($arrayToSort, next.value);
+        if (next.value.sound !== undefined) {
+          playValue($arrayToSort[next.value.sound]);
+        }
+      }
       setTimeout(soundStop, 100);
     }
   };
@@ -132,12 +143,12 @@
     algorithm = { ...algo, instance: algo.function($arrayToSort) };
 
     if (setSearchParams) {
-      const url = new URL(window.location.toString());
+      const url = new URL(window.location.href);
       url.searchParams.set(
         'algorithm',
         algo.name.toLowerCase().replace(/ /g, '-')
       );
-      history.pushState({}, '', url);
+      goto(url, { keepFocus: true, noScroll: true });
     }
   };
 </script>
@@ -148,7 +159,7 @@
       <Header bind:selectedTheme bind:oscillatorType />
     </div>
     <div class="flex-1 flex flex-col m-2 md:m-5">
-      <div id="bars-container" class="flex flex-grow min-h-80">
+      <div bind:this={barsContainer} class="flex flex-grow min-h-80">
         <BarsRender {bars} {theme} />
       </div>
     </div>

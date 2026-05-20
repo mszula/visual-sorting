@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { trackEvent } from '../umami';
-
   export let realDelay: number;
   let delay: number = 20;
 

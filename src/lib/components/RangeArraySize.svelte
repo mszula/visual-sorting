@@ -2,7 +2,6 @@
   export let size: number;
 
   import { running } from '../../states';
-  import { trackEvent } from '../umami';
 </script>
 
 <label class="form-control w-full mb-2">

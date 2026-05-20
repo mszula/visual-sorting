@@ -8,7 +8,7 @@ export type OscillatorType = (typeof customOscillatorTypes)[number] | null;
 
 const context = browser && new AudioContext();
 
-let oscillator: OscillatorNode;
+let oscillator: OscillatorNode | null = null;
 let freqStepSize = 0;
 
 const maxFrequency = 1500;
@@ -23,25 +23,28 @@ export const soundStart = (
   }
 
   freqStepSize = maxFrequency / size;
-  if (oscillator) {
-    soundStop();
-  }
+  soundStop();
   oscillator = customOscillators[oscillatorName](context);
   oscillator.connect(context.destination);
   oscillator.start();
 };
 
 export const soundStop = () => {
-  if (oscillator) {
-    oscillator.stop();
-    oscillator.disconnect();
+  if (!oscillator) {
+    return;
   }
+  try {
+    oscillator.stop();
+  } catch {
+    // already stopped — Web Audio throws InvalidStateError on double stop
+  }
+  oscillator.disconnect();
+  oscillator = null;
 };
 
 export const playValue = (value: number) => {
-  const freq = freqStepSize * (value - 1) + minFrequency;
-
-  if (oscillator) {
-    oscillator.frequency.value = freq;
+  if (!oscillator) {
+    return;
   }
+  oscillator.frequency.value = freqStepSize * (value - 1) + minFrequency;
 };

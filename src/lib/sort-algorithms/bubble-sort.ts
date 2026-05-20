@@ -1,6 +1,6 @@
 import type { SortingGenerator } from './types';
 
-export const bubleSort = function* (arr: number[]): SortingGenerator {
+export const bubbleSort = function* (arr: number[]): SortingGenerator {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length - i - 1; j++) {
       yield { access: [j, j + 1], sound: j + 1 };

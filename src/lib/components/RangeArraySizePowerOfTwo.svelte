@@ -2,7 +2,6 @@
   export let size: number;
 
   import { running } from '../../states';
-  import { trackEvent } from '../umami';
 
   const steps = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024];
 
