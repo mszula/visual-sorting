@@ -5,10 +5,12 @@
   import { base } from '$app/paths';
   import HeaderGitHubButton from './HeaderGitHubButton.svelte';
   import HeaderCoffeeButton from './HeaderCoffeeButton.svelte';
+  import HeaderHelpButton from './HeaderHelpButton.svelte';
   import MobileHeaderButtons from './mobile/MobileHeaderButtons.svelte';
 
   export let selectedTheme: string;
   export let oscillatorType: OscillatorType;
+  export let openHelp: () => void;
 </script>
 
 <div class="navbar bg-base-100 relative">
@@ -26,9 +28,10 @@
       <li><HeaderSoundControl bind:oscillatorType /></li>
       <li><HeaderThemeControl bind:selectedTheme /></li>
     </ul>
+    <HeaderHelpButton onClick={openHelp} />
     <HeaderGitHubButton />
     <HeaderCoffeeButton />
   </div>
 
-  <MobileHeaderButtons bind:oscillatorType bind:selectedTheme />
+  <MobileHeaderButtons bind:oscillatorType bind:selectedTheme {openHelp} />
 </div>

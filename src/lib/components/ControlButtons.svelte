@@ -72,12 +72,18 @@
       class="btn join-item {$running
         ? 'btn-secondary'
         : 'btn-primary'} lg:btn-lg lg:w-24"
+      title={$running ? 'Stop (Space)' : 'Start (Space)'}
       on:click={start}>{$running ? 'Stop' : 'Start'}</button
     >
-    <button class="btn join-item lg:btn-lg lg:w-24" on:click={step}>Step</button
+    <button
+      class="btn join-item lg:btn-lg lg:w-24"
+      title="Step (→)"
+      on:click={step}>Step</button
     >
   </div>
-  <button class="btn lg:btn-lg" on:click={shuffleClick}>Shuffle</button>
+  <button class="btn lg:btn-lg" title="Shuffle (R)" on:click={shuffleClick}
+    >Shuffle</button
+  >
 </div>
 <div class="flex gap-1">
   <button class="btn flex-grow" on:click={reapply}
