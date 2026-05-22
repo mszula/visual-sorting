@@ -11,11 +11,23 @@ const compAndSwap = function* (
   dir: number
 ): SortingGenerator {
   if ((arr[i] > arr[j] && dir === 1) || (arr[i] < arr[j] && dir === 0)) {
-    yield { access: [i, j], sound: i };
-    // Swapping elements
     const temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
+    yield {
+      access: [i, j],
+      sound: i,
+      comparisons: 1,
+      swaps: 1,
+      accesses: 6, // 2 for compare + 4 for swap
+    };
+  } else {
+    yield {
+      access: [i, j],
+      sound: i,
+      comparisons: 1,
+      accesses: 2,
+    };
   }
 };
 

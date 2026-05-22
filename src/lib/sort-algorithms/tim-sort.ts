@@ -1,3 +1,4 @@
+import type { ProgressIndicator } from '../types';
 import type { SortingGenerator } from './types';
 
 /**
@@ -38,9 +39,23 @@ function* insertionSort(
   for (let i = start + 1; i <= end; i++) {
     const temp = arr[i];
     let j = i - 1;
-    while (j >= start && arr[j] > temp) {
-      yield { access: [i, j], sound: j };
+    while (j >= start) {
+      if (arr[j] <= temp) {
+        yield {
+          access: [i, j],
+          sound: j,
+          comparisons: 1,
+          accesses: 1,
+        };
+        break;
+      }
       arr[j + 1] = arr[j];
+      yield {
+        access: [i, j],
+        sound: j,
+        comparisons: 1,
+        accesses: 3,
+      };
       j--;
     }
     arr[j + 1] = temp;
@@ -60,25 +75,55 @@ function* countRunAndMakeAscending(
   arr: number[],
   start: number,
   n: number
-): SortingGenerator<number> {
+): Generator<ProgressIndicator, number, unknown> {
   let runEnd = start + 1;
   if (runEnd === n) {
-    // Single element run
     return start;
   }
 
-  // Determine if run is ascending or descending
-  yield { access: [start, runEnd], sound: runEnd };
+  // Determine direction
+  yield {
+    access: [start, runEnd],
+    sound: runEnd,
+    comparisons: 1,
+    accesses: 2,
+  };
   if (arr[start] <= arr[runEnd]) {
-    // Ascending run
-    while (runEnd < n - 1 && arr[runEnd] <= arr[runEnd + 1]) {
-      yield { access: [runEnd, runEnd + 1], sound: runEnd + 1 };
+    while (runEnd < n - 1) {
+      if (arr[runEnd] > arr[runEnd + 1]) {
+        yield {
+          access: [runEnd, runEnd + 1],
+          sound: runEnd + 1,
+          comparisons: 1,
+          accesses: 2,
+        };
+        break;
+      }
+      yield {
+        access: [runEnd, runEnd + 1],
+        sound: runEnd + 1,
+        comparisons: 1,
+        accesses: 2,
+      };
       runEnd++;
     }
   } else {
-    // Descending run
-    while (runEnd < n - 1 && arr[runEnd] > arr[runEnd + 1]) {
-      yield { access: [runEnd, runEnd + 1], sound: runEnd + 1 };
+    while (runEnd < n - 1) {
+      if (arr[runEnd] <= arr[runEnd + 1]) {
+        yield {
+          access: [runEnd, runEnd + 1],
+          sound: runEnd + 1,
+          comparisons: 1,
+          accesses: 2,
+        };
+        break;
+      }
+      yield {
+        access: [runEnd, runEnd + 1],
+        sound: runEnd + 1,
+        comparisons: 1,
+        accesses: 2,
+      };
       runEnd++;
     }
 
@@ -86,8 +131,13 @@ function* countRunAndMakeAscending(
     let left = start;
     let right = runEnd;
     while (left < right) {
-      yield { access: [left, right], sound: left };
       [arr[left], arr[right]] = [arr[right], arr[left]];
+      yield {
+        access: [left, right],
+        sound: left,
+        swaps: 1,
+        accesses: 4,
+      };
       left++;
       right--;
     }
@@ -124,22 +174,35 @@ function* merge(
   let k = start;
 
   while (i < len1 && j < len2) {
-    yield { access: [k], sound: k };
     if (left[i] <= right[j]) {
       arr[k++] = left[i++];
     } else {
       arr[k++] = right[j++];
     }
+    yield {
+      access: [k - 1],
+      sound: k - 1,
+      comparisons: 1,
+      accesses: 3,
+    };
   }
 
   while (i < len1) {
-    yield { access: [k], sound: k };
     arr[k++] = left[i++];
+    yield {
+      access: [k - 1],
+      sound: k - 1,
+      accesses: 2,
+    };
   }
 
   while (j < len2) {
-    yield { access: [k], sound: k };
     arr[k++] = right[j++];
+    yield {
+      access: [k - 1],
+      sound: k - 1,
+      accesses: 2,
+    };
   }
 }
 

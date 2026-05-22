@@ -4,7 +4,12 @@
     applyPattern,
     type Pattern,
   } from '../lib/randomized-array-generator';
-  import type { ProgressIndicator, SortElement } from '../lib/types';
+  import {
+    emptyStats,
+    type ProgressIndicator,
+    type SortElement,
+    type SortStats,
+  } from '../lib/types';
   import Header from '../lib/components/Header.svelte';
   import { onMount, tick } from 'svelte';
   import { themeChange } from 'theme-change';
@@ -48,6 +53,32 @@
   let helpDialog: HelpDialog | undefined;
   const flatAlgorithms = algorithms.flat();
   let barsContainer: HTMLDivElement | undefined;
+  let stats: SortStats = emptyStats();
+  // True between sort completion and the start of the next run.
+  // Keeps the final tally on screen while preventing the next run
+  // from accumulating on top of it.
+  let runCompleted = false;
+  let prevRunning = false;
+
+  const accumulateStats = (p: ProgressIndicator) => {
+    stats.comparisons += p.comparisons ?? 0;
+    stats.swaps += p.swaps ?? 0;
+    stats.accesses += p.accesses ?? p.access.length;
+    stats = stats;
+  };
+
+  const beginNewRunIfNeeded = () => {
+    if (runCompleted) {
+      stats = emptyStats();
+      runCompleted = false;
+    }
+  };
+
+  // Watch start transitions to clear stats from the previous completed run.
+  $: {
+    if ($running && !prevRunning) beginNewRunIfNeeded();
+    prevRunning = $running;
+  }
 
   $: if (browser) savePref('size', size);
   $: if (browser) savePref('oscillatorType', oscillatorType);
@@ -135,12 +166,17 @@
 
             if (next.done) {
               window.clearInterval(intervalRef);
-              reset();
-
+              $running = false;
+              // Keep stats visible as the final tally; arm the next-run flag.
+              if (algorithm) {
+                algorithm.instance = algorithm.function($arrayToSort);
+              }
+              runCompleted = true;
               break;
             }
             if (next.value) {
               updateBars($arrayToSort, next.value);
+              accumulateStats(next.value);
               if (next.value.sound !== undefined) {
                 playValue($arrayToSort[next.value.sound]);
               }
@@ -161,6 +197,8 @@
   const reset = () => {
     updateBars($arrayToSort, { access: [] });
     $running = false;
+    stats = emptyStats();
+    runCompleted = false;
     if (algorithm) {
       algorithm.instance = algorithm.function($arrayToSort);
     }
@@ -171,6 +209,7 @@
       $running = false;
       await tick();
     }
+    beginNewRunIfNeeded();
 
     const next = algorithm.instance.next();
     if (!next.done) {
@@ -179,6 +218,7 @@
       }
       if (next.value) {
         updateBars($arrayToSort, next.value);
+        accumulateStats(next.value);
         if (next.value.sound !== undefined) {
           playValue($arrayToSort[next.value.sound]);
         }
@@ -267,7 +307,7 @@
 <main>
   <div class="flex flex-col min-h-screen">
     <div class="flex">
-      <Header bind:selectedTheme bind:oscillatorType {openHelp} />
+      <Header bind:selectedTheme bind:oscillatorType {openHelp} {stats} />
     </div>
     <div class="flex-1 flex flex-col m-2 md:m-5">
       <div bind:this={barsContainer} class="flex flex-grow min-h-80">

@@ -1,12 +1,13 @@
 import type { SortingGenerator } from './types';
 
+// Radix Sort is a non-comparison algorithm — comparisons stay 0.
 const getMax = function* (arr: number[], n: number) {
   let mx = arr[0];
   for (let i = 1; i < n; i++) {
-    yield { access: [i], sound: i };
     if (arr[i] > mx) {
       mx = arr[i];
     }
+    yield { access: [i], sound: i, accesses: 1 };
   }
   return mx;
 };
@@ -26,11 +27,10 @@ const countSort = function* (
   for (i = 0; i < n; i++) {
     const x = Math.floor(arr[i] / exp) % 10;
     count[x]++;
-    yield { access: [i], sound: i };
+    yield { access: [i], sound: i, accesses: 1 };
   }
 
-  // Change count[i] so that count[i] now contains
-  // actual position of this digit in output[]
+  // Change count[i] so that count[i] now contains actual position
   for (i = 1; i < 10; i++) count[i] += count[i - 1];
 
   // Build the output array
@@ -38,14 +38,13 @@ const countSort = function* (
     const x = Math.floor(arr[i] / exp) % 10;
     output[count[x] - 1] = arr[i];
     count[x]--;
-    yield { access: [i], sound: i };
+    yield { access: [i], sound: i, accesses: 2 };
   }
 
-  // Copy the output array to arr[], so that arr[] now
-  // contains sorted numbers according to current digit
+  // Copy output back
   for (i = 0; i < n; i++) {
     arr[i] = output[i];
-    yield { access: [i], sound: i };
+    yield { access: [i], sound: i, accesses: 1 };
   }
 };
 

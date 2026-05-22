@@ -15,24 +15,44 @@ export const oddEvenSort = function* (arr: number[]): SortingGenerator {
 
     // Perform Bubble sort on odd indexed element
     for (let i = 1; i <= n - 2; i = i + 2) {
-      yield { access: [i, i + 1], sound: i };
+      let swaps = 0;
+      let accesses = 2;
       if (arr[i] > arr[i + 1]) {
         temp = arr[i];
         arr[i] = arr[i + 1];
         arr[i + 1] = temp;
         isSorted = false;
+        swaps = 1;
+        accesses += 4;
       }
+      yield {
+        access: [i, i + 1],
+        sound: i,
+        comparisons: 1,
+        swaps,
+        accesses,
+      };
     }
 
     // Perform Bubble sort on even indexed element
     for (let i = 0; i <= n - 2; i = i + 2) {
-      yield { access: [i, i + 1], sound: i };
+      let swaps = 0;
+      let accesses = 2;
       if (arr[i] > arr[i + 1]) {
         temp = arr[i];
         arr[i] = arr[i + 1];
         arr[i + 1] = temp;
         isSorted = false;
+        swaps = 1;
+        accesses += 4;
       }
+      yield {
+        access: [i, i + 1],
+        sound: i,
+        comparisons: 1,
+        swaps,
+        accesses,
+      };
     }
   }
 };

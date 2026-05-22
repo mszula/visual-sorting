@@ -9,13 +9,27 @@ export const selectionSort = function* (arr: number[]): SortingGenerator {
       if (arr[j] < arr[min]) {
         min = j;
       }
-      yield { access: [i, j], sound: j };
+      yield {
+        access: [i, j],
+        sound: j,
+        comparisons: 1,
+        accesses: 2,
+      };
     }
+    let swaps = 0;
+    let placementAccesses = 0;
     if (min != i) {
       const tmp = arr[i];
       arr[i] = arr[min];
       arr[min] = tmp;
+      swaps = 1;
+      placementAccesses = 4;
     }
-    yield { access: [i], sound: i };
+    yield {
+      access: [i],
+      sound: i,
+      swaps,
+      accesses: placementAccesses,
+    };
   }
 };

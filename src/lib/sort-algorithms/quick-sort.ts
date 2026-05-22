@@ -1,26 +1,54 @@
 import type { SortingGenerator } from './types';
 
 function* partition(items: number[], left: number, right: number) {
-  const pivot = items[Math.floor((right + left) / 2)];
+  const pivot = items[Math.floor((right + left) / 2)]; // 1 read
   let i = left;
   let j = right;
   while (i <= j) {
     while (items[i] < pivot) {
+      yield {
+        access: [i, j],
+        sound: i,
+        comparisons: 1,
+        accesses: 1,
+      };
       i++;
-      yield { access: [i, j], sound: i };
     }
+    // exit comparison for inner while
+    yield {
+      access: [i, j],
+      sound: i,
+      comparisons: 1,
+      accesses: 1,
+    };
     while (items[j] > pivot) {
+      yield {
+        access: [i, j],
+        sound: j,
+        comparisons: 1,
+        accesses: 1,
+      };
       j--;
-      yield { access: [i, j], sound: j };
     }
+    yield {
+      access: [i, j],
+      sound: j,
+      comparisons: 1,
+      accesses: 1,
+    };
     if (i <= j) {
       const temp = items[i];
       items[i] = items[j];
       items[j] = temp;
+      yield {
+        access: [i, j],
+        sound: j,
+        swaps: 1,
+        accesses: 4,
+      };
       i++;
       j--;
     }
-    yield { access: [i, j], sound: j };
   }
   return i;
 }

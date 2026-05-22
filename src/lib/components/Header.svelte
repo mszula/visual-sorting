@@ -6,11 +6,14 @@
   import HeaderGitHubButton from './HeaderGitHubButton.svelte';
   import HeaderCoffeeButton from './HeaderCoffeeButton.svelte';
   import HeaderHelpButton from './HeaderHelpButton.svelte';
+  import HeaderStats from './HeaderStats.svelte';
   import MobileHeaderButtons from './mobile/MobileHeaderButtons.svelte';
+  import type { SortStats } from '../types';
 
   export let selectedTheme: string;
   export let oscillatorType: OscillatorType;
   export let openHelp: () => void;
+  export let stats: SortStats;
 </script>
 
 <div class="navbar bg-base-100 relative">
@@ -22,6 +25,8 @@
       </span>
     </a>
   </div>
+
+  <HeaderStats {stats} />
 
   <div class="hidden md:flex flex-none">
     <ul class="menu menu-horizontal px-1 items-center">

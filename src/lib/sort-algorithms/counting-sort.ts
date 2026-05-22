@@ -17,13 +17,15 @@ import type { SortingGenerator } from './types';
 export const countingSort = function* (arr: number[]): SortingGenerator {
   if (arr.length === 0) return;
 
+  // Counting Sort is a non-comparison algorithm — comparisons stay 0.
   // Find the maximum value in the array
   let max = arr[0];
   for (let i = 1; i < arr.length; i++) {
-    yield { access: [i], sound: i };
     if (arr[i] > max) {
       max = arr[i];
     }
+    // arr[i] read for max comparison + arr[max] not needed (cached); count it as 1 read
+    yield { access: [i], sound: i, accesses: 1 };
   }
 
   // Create count array with size max + 1
@@ -31,14 +33,14 @@ export const countingSort = function* (arr: number[]): SortingGenerator {
 
   // Count the frequency of each element
   for (let i = 0; i < arr.length; i++) {
-    yield { access: [i], sound: i };
     count[arr[i]]++;
+    yield { access: [i], sound: i, accesses: 1 };
   }
 
   // Modify count array to store cumulative count
   for (let i = 1; i <= max; i++) {
-    yield { access: [i - 1], sound: i - 1 };
     count[i] += count[i - 1];
+    yield { access: [i - 1], sound: i - 1 };
   }
 
   // Create output array
@@ -46,14 +48,14 @@ export const countingSort = function* (arr: number[]): SortingGenerator {
 
   // Build the output array
   for (let i = arr.length - 1; i >= 0; i--) {
-    yield { access: [i], sound: i };
     output[count[arr[i]] - 1] = arr[i];
     count[arr[i]]--;
+    yield { access: [i], sound: i, accesses: 2 }; // 1 read of arr + 1 write to output
   }
 
   // Copy the output array back to the original array
   for (let i = 0; i < arr.length; i++) {
-    yield { access: [i], sound: i };
     arr[i] = output[i];
+    yield { access: [i], sound: i, accesses: 1 };
   }
 };

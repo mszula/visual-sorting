@@ -5,10 +5,22 @@ function* sort(arr: number[], l: number, h: number): SortingGenerator {
     return;
   }
 
-  // If first element is smaller than last, swap them
   if (arr[l] > arr[h]) {
     [arr[l], arr[h]] = [arr[h], arr[l]];
-    yield { access: [l, h], sound: l };
+    yield {
+      access: [l, h],
+      sound: l,
+      comparisons: 1,
+      swaps: 1,
+      accesses: 6,
+    };
+  } else {
+    yield {
+      access: [l, h],
+      sound: l,
+      comparisons: 1,
+      accesses: 2,
+    };
   }
 
   // If there are more than two elements in the array

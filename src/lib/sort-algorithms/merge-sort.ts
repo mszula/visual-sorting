@@ -32,7 +32,6 @@ const merge = function* (
   let k = l;
 
   while (i < n1 && j < n2) {
-    yield { access: [k], sound: k };
     if (left[i] <= right[j]) {
       arr[k] = left[i];
       i++;
@@ -40,6 +39,12 @@ const merge = function* (
       arr[k] = right[j];
       j++;
     }
+    yield {
+      access: [k],
+      sound: k,
+      comparisons: 1,
+      accesses: 3, // 2 reads for compare + 1 write
+    };
     k++;
   }
 
@@ -47,7 +52,11 @@ const merge = function* (
   // L[], if there are any
   while (i < n1) {
     arr[k] = left[i];
-    yield { access: [k], sound: k };
+    yield {
+      access: [k],
+      sound: k,
+      accesses: 2, // 1 read + 1 write
+    };
     i++;
     k++;
   }
@@ -56,7 +65,11 @@ const merge = function* (
   // R[], if there are any
   while (j < n2) {
     arr[k] = right[j];
-    yield { access: [k], sound: k };
+    yield {
+      access: [k],
+      sound: k,
+      accesses: 2,
+    };
     j++;
     k++;
   }

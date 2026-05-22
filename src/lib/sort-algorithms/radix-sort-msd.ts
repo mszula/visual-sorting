@@ -1,12 +1,13 @@
 import type { SortingGenerator } from './types';
 
+// MSD Radix Sort is a non-comparison algorithm — comparisons stay 0.
 const getMax = function* (arr: number[], n: number) {
   let mx = arr[0];
   for (let i = 1; i < n; i++) {
-    yield { access: [i], sound: i };
     if (arr[i] > mx) {
       mx = arr[i];
     }
+    yield { access: [i], sound: i, accesses: 1 };
   }
   return mx;
 };
@@ -21,29 +22,23 @@ const countSortMSD = function* (
   const output = new Array(n);
   const count = new Array(10).fill(0);
 
-  // Store count of occurrences in count[]
   for (let i = start; i <= end; i++) {
     const x = Math.floor(arr[i] / exp) % 10;
     count[x]++;
-    yield { access: [i], sound: i };
+    yield { access: [i], sound: i, accesses: 1 };
   }
 
-  // Change count[i] so that count[i] now contains
-  // actual position of this digit in output[]
   for (let i = 1; i < 10; i++) count[i] += count[i - 1];
 
-  // Build the output array
   for (let i = end; i >= start; i--) {
     const x = Math.floor(arr[i] / exp) % 10;
     output[--count[x]] = arr[i];
-    yield { access: [i], sound: i };
+    yield { access: [i], sound: i, accesses: 2 };
   }
 
-  // Copy the output array to arr[], so that arr[] now
-  // contains sorted numbers according to current digit
   for (let i = 0; i < n; i++) {
     arr[start + i] = output[i];
-    yield { access: [start + i], sound: start + i };
+    yield { access: [start + i], sound: start + i, accesses: 1 };
   }
 };
 

@@ -7,27 +7,33 @@ function* flip(arr: number[], i: number) {
   let temp,
     start = 0;
   while (start < i) {
-    yield { access: [start, i], sound: i };
-
     temp = arr[start];
     arr[start] = arr[i];
     arr[i] = temp;
+    yield {
+      access: [start, i],
+      sound: i,
+      swaps: 1,
+      accesses: 4,
+    };
     start++;
     i--;
   }
 }
 
-// Returns index of the
-// maximum element in
-// arr[0..n-1]
+// Returns index of the maximum element in arr[0..n-1]
 function* findMax(arr: number[], n: number) {
   let mi, i;
   for (mi = 0, i = 0; i < n; ++i) {
-    yield { access: [i, mi], sound: i };
-
     if (arr[i] > arr[mi]) {
       mi = i;
     }
+    yield {
+      access: [i, mi],
+      sound: i,
+      comparisons: 1,
+      accesses: 2,
+    };
   }
 
   return mi;

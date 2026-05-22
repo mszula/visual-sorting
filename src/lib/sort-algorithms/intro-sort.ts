@@ -1,3 +1,4 @@
+import type { ProgressIndicator } from '../types';
 import type { SortingGenerator } from './types';
 
 /**
@@ -56,31 +57,56 @@ function* partition(
   low: number,
   high: number
 ): Generator<ProgressIndicator, number, unknown> {
-  // Choose middle element as pivot
   const pivotIndex = Math.floor((low + high) / 2);
   const pivot = arr[pivotIndex];
 
-  // Move pivot to end
   [arr[pivotIndex], arr[high]] = [arr[high], arr[pivotIndex]];
-  yield { access: [pivotIndex, high], sound: high };
+  yield {
+    access: [pivotIndex, high],
+    sound: high,
+    swaps: 1,
+    accesses: 4,
+  };
 
   let i = low - 1;
 
   for (let j = low; j < high; j++) {
-    yield { access: [j], sound: j };
-
     if (arr[j] <= pivot) {
       i++;
       if (i !== j) {
         [arr[i], arr[j]] = [arr[j], arr[i]];
-        yield { access: [i, j], sound: j };
+        yield {
+          access: [i, j],
+          sound: j,
+          comparisons: 1,
+          swaps: 1,
+          accesses: 5, // 1 read for compare + 4 for swap
+        };
+      } else {
+        yield {
+          access: [j],
+          sound: j,
+          comparisons: 1,
+          accesses: 1,
+        };
       }
+    } else {
+      yield {
+        access: [j],
+        sound: j,
+        comparisons: 1,
+        accesses: 1,
+      };
     }
   }
 
-  // Move pivot to its correct position
   [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
-  yield { access: [i + 1, high], sound: high };
+  yield {
+    access: [i + 1, high],
+    sound: high,
+    swaps: 1,
+    accesses: 4,
+  };
 
   return i + 1;
 }
@@ -94,17 +120,31 @@ function* insertionSort(
     const key = arr[i];
     let j = i - 1;
 
-    yield { access: [i], sound: i };
+    yield { access: [i], sound: i, accesses: 1 };
 
-    while (j >= low && arr[j] > key) {
-      yield { access: [j, j + 1], sound: j + 1 };
+    while (j >= low) {
+      if (arr[j] <= key) {
+        yield {
+          access: [j, j + 1],
+          sound: j + 1,
+          comparisons: 1,
+          accesses: 1,
+        };
+        break;
+      }
       arr[j + 1] = arr[j];
+      yield {
+        access: [j, j + 1],
+        sound: j + 1,
+        comparisons: 1,
+        accesses: 3,
+      };
       j--;
     }
 
     if (j + 1 !== i) {
       arr[j + 1] = key;
-      yield { access: [j + 1], sound: j + 1 };
+      yield { access: [j + 1], sound: j + 1, accesses: 1 };
     }
   }
 }
@@ -116,18 +156,19 @@ function* heapSortRange(
 ): SortingGenerator {
   const n = high - low + 1;
 
-  // Build max heap
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
     yield* heapify(arr, low, n, i);
   }
 
-  // Extract elements from heap one by one
   for (let i = n - 1; i > 0; i--) {
-    // Move current root to end
     [arr[low], arr[low + i]] = [arr[low + i], arr[low]];
-    yield { access: [low, low + i], sound: low + i };
+    yield {
+      access: [low, low + i],
+      sound: low + i,
+      swaps: 1,
+      accesses: 4,
+    };
 
-    // Call heapify on the reduced heap
     yield* heapify(arr, low, i, 0);
   }
 }
@@ -141,19 +182,43 @@ function* heapify(
   let largest = i;
   const left = 2 * i + 1;
   const right = 2 * i + 2;
+  let comparisons = 0;
+  let accesses = 0;
 
-  if (left < n && arr[low + left] > arr[low + largest]) {
-    largest = left;
+  if (left < n) {
+    comparisons++;
+    accesses += 2;
+    if (arr[low + left] > arr[low + largest]) {
+      largest = left;
+    }
   }
 
-  if (right < n && arr[low + right] > arr[low + largest]) {
-    largest = right;
+  if (right < n) {
+    comparisons++;
+    accesses += 2;
+    if (arr[low + right] > arr[low + largest]) {
+      largest = right;
+    }
   }
 
   if (largest !== i) {
     [arr[low + i], arr[low + largest]] = [arr[low + largest], arr[low + i]];
-    yield { access: [low + i, low + largest], sound: low + largest };
+    yield {
+      access: [low + i, low + largest],
+      sound: low + largest,
+      comparisons,
+      swaps: 1,
+      accesses: accesses + 4,
+    };
 
     yield* heapify(arr, low, n, largest);
+  } else if (comparisons > 0) {
+    // emit the comparisons even when no swap occurs
+    yield {
+      access: [low + i],
+      sound: low + i,
+      comparisons,
+      accesses,
+    };
   }
 }

@@ -33,15 +33,24 @@ export const combSort = function* (arr: number[]): SortingGenerator {
 
     // Compare elements with current gap
     for (let i = 0; i < n - gap; i++) {
-      yield { access: [i, i + gap], sound: i + gap };
-
+      let swaps = 0;
+      let accesses = 2;
       if (arr[i] > arr[i + gap]) {
         // Swap elements
         const temp = arr[i];
         arr[i] = arr[i + gap];
         arr[i + gap] = temp;
         swapped = true;
+        swaps = 1;
+        accesses += 4;
       }
+      yield {
+        access: [i, i + gap],
+        sound: i + gap,
+        comparisons: 1,
+        swaps,
+        accesses,
+      };
     }
   }
 };
