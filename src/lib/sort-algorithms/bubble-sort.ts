@@ -2,6 +2,7 @@ import type { SortingGenerator } from './types';
 
 export const bubbleSort = function* (arr: number[]): SortingGenerator {
   for (let i = 0; i < arr.length; i++) {
+    let sorted = true;
     for (let j = 0; j < arr.length - i - 1; j++) {
       let swaps = 0;
       let accesses = 2; // read arr[j], arr[j + 1]
@@ -11,6 +12,7 @@ export const bubbleSort = function* (arr: number[]): SortingGenerator {
         arr[j + 1] = temp;
         swaps = 1;
         accesses += 4; // two reads + two writes for the swap
+        sorted = false;
       }
       yield {
         access: [j, j + 1],
@@ -20,5 +22,6 @@ export const bubbleSort = function* (arr: number[]): SortingGenerator {
         accesses,
       };
     }
+    if (sorted) return;
   }
 };
