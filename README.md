@@ -13,8 +13,12 @@ https://github.com/user-attachments/assets/2b9674c5-c705-4a22-ba6a-474cfc11cddd
 - **Dynamic Visualization**: Vertical bars present the sorting process in real-time.
 - **Step-by-Step Exploration**: Go through each step of the algorithm, and analyze what going on.
 - **Sound Experience**: Each vertical bar represents a value in the sorting array. As the algorithm works on a bar, a sound is produced based on its height. There are 24 different sound oscillator options to choose from.
-- **Input Array Options**: Customize the array to sort by shuffling, reversing, or arranging in a mountain and valley form. Choose array sizes ranging from 2 to 1024 elements.
+- **Side-by-Side Compare Mode**: Race two algorithms on the same array — toggle the compare icon in the header, pick algorithms per panel, switch between horizontal and vertical layout.
+- **Live Metrics**: Comparisons, swaps and array accesses counted in real time and displayed in the header. Non-comparison sorts (Counting, Radix) clearly show `Cmp = 0`.
+- **Keyboard Shortcuts**: `Space` start/stop, `→` step, `R` shuffle, `↑/↓` faster/slower, `[/]` previous/next algorithm, `M` mute, `?` opens the full reference.
+- **Input Array Options**: Shuffle, Reverse, Valley, Mountain, **Wave**, **Nearly Sorted** and **Pipe Organ** patterns. Array sizes from 2 to 1024 elements. The selected pattern persists when you resize.
 - **Adjustable Speed**: Control the pace by dynamically changing the delay, to speed up or slow down the process, with precision up to 500 ms.
+- **Persistent Preferences**: Array size, delay, sound type and selected pattern survive page reloads.
 - **Themes**: Various themes from DaisyUI so that everyone can find something for themselves.
 
 ## 🤖 Supported Sorting Algorithms
@@ -44,6 +48,12 @@ https://github.com/user-attachments/assets/2b9674c5-c705-4a22-ba6a-474cfc11cddd
 - [Counting Sort](https://en.wikipedia.org/wiki/Counting_sort) - Non-comparison sorting algorithm that counts occurrences of each value
 - [Comb Sort](https://en.wikipedia.org/wiki/Comb_sort) - Improved Bubble Sort variant that uses gap-based comparisons
 - [Intro Sort](https://en.wikipedia.org/wiki/Introsort) - Hybrid algorithm combining Quick Sort, Heap Sort, and Insertion Sort
+
+### 🌊 Recently Added Patterns
+
+- **Wave** - Permutation of 1..n where bar heights trace a single sine period
+- **Nearly Sorted** - Sorted array with ~5% random swaps — adaptive sorts (Insertion, Tim) shine here
+- **Pipe Organ** - Three ascending mini-mountain peaks evoking organ pipes
 
 ## 🔍 Rationale
 

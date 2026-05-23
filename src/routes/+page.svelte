@@ -26,6 +26,7 @@
   import LeaveAStarModal from '$lib/components/LeaveAStarModal.svelte';
   import KoFiSupportModal from '$lib/components/KoFiSupportModal.svelte';
   import HelpDialog from '$lib/components/HelpDialog.svelte';
+  import WhatsNewModal from '$lib/components/WhatsNewModal.svelte';
   import { algorithms } from '$lib/sort-algorithms/algorithms';
 
   let selectedTheme: Theme = 'dim';
@@ -491,4 +492,5 @@
   <LeaveAStarModal />
   <KoFiSupportModal />
   <HelpDialog bind:this={helpDialog} />
+  <WhatsNewModal />
 </main>
