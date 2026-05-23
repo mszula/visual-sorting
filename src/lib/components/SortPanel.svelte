@@ -67,6 +67,18 @@
   export const resetPanel = () => {
     initialize();
   };
+
+  /**
+   * Re-arm the generator on the CURRENT working array (no copy from baseArray).
+   * Used when the user clicks Start after a previous run finished — they
+   * expect the algorithm to run on whatever the array currently looks like
+   * (typically sorted), not to silently reshuffle back to the starting state.
+   */
+  export const restart = () => {
+    instance = algorithm.function(workingArray);
+    stats = emptyStats();
+    isDone = false;
+  };
 </script>
 
 <div class="flex flex-1 min-w-0 min-h-0">

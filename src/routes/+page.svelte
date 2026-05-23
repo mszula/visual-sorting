@@ -67,8 +67,12 @@
 
   const beginNewRunIfNeeded = () => {
     if (runCompleted) {
-      panelA?.resetPanel();
-      if (compareMode) panelB?.resetPanel();
+      // restart() re-arms the generator on the CURRENT working array (already
+      // sorted from the previous run) instead of copying baseArray back.
+      // Otherwise a Start click after completion would silently re-shuffle and
+      // re-sort instead of running on the visible state.
+      panelA?.restart();
+      if (compareMode) panelB?.restart();
       runCompleted = false;
     }
   };
