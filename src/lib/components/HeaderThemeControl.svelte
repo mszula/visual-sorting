@@ -19,8 +19,13 @@
   };
 </script>
 
-<details bind:this={ref}>
-  <summary on:click|stopPropagation={handleMenuOutsideClick(ref, 'setTheme')}>
+<details bind:this={ref} class="md:relative md:inline-block">
+  <summary
+    class="md:btn md:btn-square md:btn-ghost"
+    title="Theme: {selectedTheme}"
+    aria-label="Select theme"
+    on:click|stopPropagation={handleMenuOutsideClick(ref, 'setTheme')}
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -50,7 +55,9 @@
       >{selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)}</span
     >
   </summary>
-  <ul class="p-2 bg-base-100 rounded-t-none z-10">
+  <ul
+    class="p-2 bg-base-100 rounded-t-none z-50 md:menu md:flex-nowrap md:absolute md:right-0 md:top-full md:bg-base-100"
+  >
     {#each themes as theme}
       <li>
         <button

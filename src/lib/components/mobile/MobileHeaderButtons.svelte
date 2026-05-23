@@ -4,10 +4,13 @@
   import HeaderThemeControl from '../HeaderThemeControl.svelte';
   import HeaderGitHubButton from '../HeaderGitHubButton.svelte';
   import HeaderHelpButton from '../HeaderHelpButton.svelte';
+  import HeaderCompareButton from '../HeaderCompareButton.svelte';
 
   export let selectedTheme: string;
   export let oscillatorType: OscillatorType;
   export let openHelp: () => void;
+  export let compareMode: boolean;
+  export let toggleCompareMode: () => void;
 
   let isMenuOpen = false;
 
@@ -18,6 +21,11 @@
   const handleHelpClick = () => {
     isMenuOpen = false;
     openHelp();
+  };
+
+  const handleCompareClick = () => {
+    isMenuOpen = false;
+    toggleCompareMode();
   };
 </script>
 
@@ -50,6 +58,12 @@
     <ul class="menu p-2 items-center w-full">
       <li class="w-full"><HeaderSoundControl bind:oscillatorType /></li>
       <li class="w-full"><HeaderThemeControl bind:selectedTheme /></li>
+      <li class="w-full">
+        <HeaderCompareButton
+          {compareMode}
+          toggleCompareMode={handleCompareClick}
+        />
+      </li>
       <li class="w-full"><HeaderHelpButton onClick={handleHelpClick} /></li>
       <li class="w-full"><HeaderGitHubButton /></li>
     </ul>

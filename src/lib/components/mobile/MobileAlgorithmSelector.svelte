@@ -14,7 +14,7 @@
   };
 </script>
 
-<div class="mb-2 md:mb-0 md:mr-5">
+<div class="mb-2 md:mb-0">
   <select
     class="select select-bordered w-full"
     on:change={(e) => change(e.currentTarget.value)}
