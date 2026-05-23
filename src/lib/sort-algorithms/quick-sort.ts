@@ -1,7 +1,7 @@
 import type { SortingGenerator } from './types';
 
 function* partition(items: number[], left: number, right: number) {
-  const pivot = items[Math.floor((right + left) / 2)]; // 1 read
+  const pivot = items[left + Math.floor((right - left) / 2)]; // 1 read
   let i = left;
   let j = right;
   while (i <= j) {
