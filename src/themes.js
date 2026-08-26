@@ -19,4 +19,5 @@ export default [
   'winter',
   'dim',
   'nord',
+  'metal',
 ];
