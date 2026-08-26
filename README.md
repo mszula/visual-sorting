@@ -83,7 +83,7 @@ And that's it 😄
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=mszula/visual-sorting&type=Date)](https://star-history.com/#mszula/visual-sorting&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=mszula/visual-sorting&type=Date)](https://star-history.dera.page/#mszula/visual-sorting&Date)
 
 ## 📄 License
 
