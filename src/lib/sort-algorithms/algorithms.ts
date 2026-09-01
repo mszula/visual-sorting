@@ -12,6 +12,7 @@ import { heapSort } from './heap-sort';
 import { insertionSort } from './insertion-sort';
 import { introSort } from './intro-sort';
 import { mergeSort } from './merge-sort';
+import { miracleSort } from './miracle-sort';
 import { oddEvenSort } from './odd-even-sort';
 import { pancakeSort } from './pancake-sort';
 import { quickSort } from './quick-sort';
@@ -95,6 +96,11 @@ export const algorithms: AlgorithmDefinition[][] = [
     {
       name: 'Bogo Sort',
       function: bogoSort,
+    },
+    {
+      name: 'Miracle Sort',
+      function: miracleSort,
+      badge: 'new',
     },
     {
       name: 'Exchange Sort',
